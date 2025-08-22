@@ -1,0 +1,6 @@
+app.DBApp.takeAction:177||app.DBApp.takeAction:193||app.DBApp.takeAction:194
+util.validation.Validator.validateTableCreation:31
+util.validation.Validator.validateInsertionInput:90||util.validation.Validator.validateInsertionInput:91||util.validation.Validator.validateInsertionInput:92
+util.validation.Validator.validateDeletionInput:100||util.validation.Validator.validateDeletionInput:101||util.validation.Validator.validateDeletionInput:102
+util.validation.Validator.validateUpdateInput:109||util.validation.Validator.validateUpdateInput:110
+util.validation.Validator.checkMinMaxMissingCol:265

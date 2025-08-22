@@ -1,0 +1,2 @@
+org.traccar.protocol.Gt06ProtocolDecoder.decodeLbs:361
+org.traccar.protocol.Gt06ProtocolDecoder.decodeVariant:1488

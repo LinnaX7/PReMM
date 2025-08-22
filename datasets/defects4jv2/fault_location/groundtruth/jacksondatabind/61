@@ -1,0 +1,3 @@
+com.fasterxml.jackson.databind.ObjectMapper.useForType:232
+com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder.buildTypeSerializer:74
+com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder.buildTypeDeserializer:104

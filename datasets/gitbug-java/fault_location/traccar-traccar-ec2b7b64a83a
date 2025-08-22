@@ -1,0 +1,3 @@
+org.traccar.protocol.Jt600FrameDecoder.decode:38
+org.traccar.protocol.Jt600ProtocolDecoder.isLongFormat:90
+org.traccar.protocol.Jt600ProtocolDecoder.decodeBinary:126||org.traccar.protocol.Jt600ProtocolDecoder.decodeBinary:128

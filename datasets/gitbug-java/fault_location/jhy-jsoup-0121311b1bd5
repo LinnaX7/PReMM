@@ -1,0 +1,3 @@
+org.jsoup.helper.UrlBuilder.build:50||org.jsoup.helper.UrlBuilder.build:54
+org.jsoup.helper.UrlBuilder.normalizeQuery:89
+org.jsoup.helper.UrlBuilder.normalizeRef:94

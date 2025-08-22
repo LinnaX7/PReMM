@@ -1,0 +1,5 @@
+bsh.Reflect.getMethod:1073
+bsh.This.invokeImpl:222||bsh.This.invokeImpl:223||bsh.This.invokeImpl:224||bsh.This.invokeImpl:225||bsh.This.invokeImpl:226
+bsh.This.invokeImpl:236||bsh.This.invokeImpl:237||bsh.This.invokeImpl:238||bsh.This.invokeImpl:239||bsh.This.invokeImpl:240
+bsh.This.toString:271
+bsh.This.invokeMethod:384||bsh.This.invokeMethod:385||bsh.This.invokeMethod:386||bsh.This.invokeMethod:387||bsh.This.invokeMethod:404

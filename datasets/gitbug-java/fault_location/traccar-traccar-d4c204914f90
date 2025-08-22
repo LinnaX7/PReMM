@@ -1,0 +1,2 @@
+org.traccar.protocol.Gt06ProtocolDecoder.decodeBasic:830
+org.traccar.protocol.Gt06ProtocolDecoder.decodeVariant:1411

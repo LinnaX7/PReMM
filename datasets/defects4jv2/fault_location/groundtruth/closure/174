@@ -1,0 +1,3 @@
+com.google.javascript.jscomp.JsAst.parse:82||com.google.javascript.jscomp.JsAst.parse:95||com.google.javascript.jscomp.JsAst.parse:99
+com.google.javascript.jscomp.NodeUtil.newQualifiedNameNodeDeclaration:2367||com.google.javascript.jscomp.NodeUtil.newQualifiedNameNodeDeclaration:2369
+com.google.javascript.jscomp.ScopedAliases.findAliases:356||com.google.javascript.jscomp.ScopedAliases.findAliases:357||com.google.javascript.jscomp.ScopedAliases.findAliases:365||com.google.javascript.jscomp.ScopedAliases.findAliases:366||com.google.javascript.jscomp.ScopedAliases.findAliases:377||com.google.javascript.jscomp.ScopedAliases.findAliases:386

@@ -1,0 +1,3 @@
+org.springframework.retry.backoff.ExponentialBackOffPolicy.backOff:248
+org.springframework.retry.backoff.FixedBackOffPolicy.doBackOff:100
+org.springframework.retry.backoff.UniformRandomBackOffPolicy.doBackOff:141

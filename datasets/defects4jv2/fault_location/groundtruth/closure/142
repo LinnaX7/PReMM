@@ -1,0 +1,2 @@
+com.google.javascript.jscomp.CoalesceVariableNames.enterScope:108
+com.google.javascript.jscomp.parsing.JsDocInfoParser.extractMultilineTextualBlock:1168

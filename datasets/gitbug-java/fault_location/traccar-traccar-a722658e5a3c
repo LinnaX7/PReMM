@@ -1,0 +1,2 @@
+org.traccar.protocol.TotemProtocolDecoder.decode4:398
+org.traccar.protocol.TotemProtocolDecoder.decodeObd:520||org.traccar.protocol.TotemProtocolDecoder.decodeObd:521||org.traccar.protocol.TotemProtocolDecoder.decodeObd:522

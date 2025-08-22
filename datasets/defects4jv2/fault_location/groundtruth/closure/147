@@ -1,0 +1,2 @@
+com.google.javascript.jscomp.CheckGlobalThis.shouldTraverse:108
+com.google.javascript.jscomp.RuntimeTypeCheck.visitFunction:247

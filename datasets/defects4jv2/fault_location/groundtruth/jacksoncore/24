@@ -1,0 +1,4 @@
+com.fasterxml.jackson.core.base.ParserBase._reportTooLongIntegral:869||com.fasterxml.jackson.core.base.ParserBase._reportTooLongIntegral:870||com.fasterxml.jackson.core.base.ParserBase._reportTooLongIntegral:871
+com.fasterxml.jackson.core.base.ParserBase.convertNumberToInt:887
+com.fasterxml.jackson.core.base.ParserMinimalBase.reportOverflowInt:565||com.fasterxml.jackson.core.base.ParserMinimalBase.reportOverflowInt:566
+com.fasterxml.jackson.core.base.ParserMinimalBase.reportOverflowLong:582||com.fasterxml.jackson.core.base.ParserMinimalBase.reportOverflowLong:583

@@ -1,0 +1,1100 @@
+{
+    "AuthMe-ConfigMe-7bf10c513479": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/ch/jalu/configme/configurationdata/PropertyListBuilder.java#add",
+                "location": [
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    41,
+                    42,
+                    45
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/ch/jalu/configme/configurationdata/PropertyListBuilder.java#create",
+                "location": [
+                    57
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "Bindambc-whatsapp-business-java-api-fd321cb63437": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/whatsapp/api/domain/templates/QuickReplyButton.java#QuickReplyButton",
+                "location": [
+                    15
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/whatsapp/api/domain/templates/UrlButton.java#UrlButton",
+                "location": [
+                    24
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "BrightSpots-rcv-688920f27706": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/network/brightspots/rcv/Logger.java#addTabulationFileLogging",
+                "location": [
+                    98
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/network/brightspots/rcv/Logger.java#removeTabulationFileLogging",
+                "location": [
+                    119
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/network/brightspots/rcv/ResultsWriter.java#generateJsonFile",
+                "location": [
+                    118
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/network/brightspots/rcv/ResultsWriter.java#generateSummarySpreadsheet",
+                "location": [
+                    388
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/network/brightspots/rcv/ResultsWriter.java#writeGenericCvrCsv",
+                "location": [
+                    556
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "Enigmatis-graphql-java-annotations-183752ce8b9a": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/graphql/annotations/processor/retrievers/fieldBuilders/DirectivesBuilder.java#transformArgument",
+                "location": [
+                    137
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/graphql/annotations/processor/retrievers/fieldBuilders/DirectivesBuilder.java#transformArgument",
+                "location": [
+                    162,
+                    163
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "GoSimpleLLC-nbvcxz-ee8d5c62f4fb": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/me/gosimple/nbvcxz/matching/DictionaryMatcher.java#match",
+                "location": [
+                    301,
+                    302,
+                    304,
+                    305,
+                    307,
+                    308,
+                    309,
+                    310,
+                    311,
+                    312,
+                    313,
+                    314,
+                    315,
+                    316,
+                    318,
+                    319
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/me/gosimple/nbvcxz/resources/ConfigurationBuilder.java#getDefaultMaxLength",
+                "location": [
+                    211
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/me/gosimple/nbvcxz/resources/Dictionary.java#Dictionary",
+                "location": [
+                    60,
+                    71,
+                    72
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "YehiaFarghaly-database-engine-8314bfdec0aa": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/app/DBApp.java#takeAction",
+                "location": [
+                    177,
+                    193,
+                    194
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#validateTableCreation",
+                "location": [
+                    31
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#validateInsertionInput",
+                "location": [
+                    90,
+                    91,
+                    92
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#validateDeletionInput",
+                "location": [
+                    100,
+                    101,
+                    102
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#validateUpdateInput",
+                "location": [
+                    109,
+                    110
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#checkMinMaxMissingCol",
+                "location": [
+                    265
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "YehiaFarghaly-database-engine-c5f961f27373": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/app/DBApp.java#takeAction",
+                "location": [
+                    187
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#validateTableCreation",
+                "location": [
+                    37,
+                    38
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/util/validation/Validator.java#sameColMinMax",
+                "location": [
+                    89,
+                    90,
+                    91
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "adoble-adr-j-7fe616c55a5b": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/doble/commands/CommandNew.java#highestIndex",
+                "location": [
+                    251
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/doble/commands/CommandNew.java#toInt",
+                "location": [
+                    262,
+                    263,
+                    264
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "aws-event-ruler-68481127e050": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/software/amazon/event/ruler/JsonRuleCompiler.java#processMatchExpression",
+                "location": [
+                    497
+                ]
+            },
+            {
+                "faulty_method": "src/main/software/amazon/event/ruler/RuleCompiler.java#processMatchExpression",
+                "location": [
+                    396
+                ]
+            }
+        ],
+        "builder": "maven-middle"
+    },
+    "ballerina-platform-lsp4intellij-8b03eddead47": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/wso2/lsp4intellij/utils/FileUtils.java#VFSToURI",
+                "location": [
+                    201,
+                    202,
+                    203,
+                    204,
+                    205,
+                    206
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/wso2/lsp4intellij/utils/FileUtils.java#pathToUri",
+                "location": [
+                    289
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "beanshell-beanshell-7a60a06bb567": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/bsh/Reflect.java#getMethod",
+                "location": [
+                    1073
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/bsh/This.java#invokeImpl",
+                "location": [
+                    222,
+                    223,
+                    224,
+                    225,
+                    226
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/bsh/This.java#invokeImpl",
+                "location": [
+                    236,
+                    237,
+                    238,
+                    239,
+                    240
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/bsh/This.java#toString",
+                "location": [
+                    271
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/bsh/This.java#invokeMethod",
+                "location": [
+                    384,
+                    385,
+                    386,
+                    387,
+                    404
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "bhlangonijr-chesslib-cf68677eac6d": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/github/bhlangonijr/chesslib/pgn/GameLoader.java#loadNextGame",
+                "location": [
+                    53,
+                    68,
+                    69,
+                    70,
+                    71,
+                    80
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/github/bhlangonijr/chesslib/pgn/GameLoader.java#addProperty",
+                "location": [
+                    87,
+                    92,
+                    121,
+                    122,
+                    123,
+                    124,
+                    125,
+                    140,
+                    141,
+                    142,
+                    143,
+                    144,
+                    154,
+                    155,
+                    156,
+                    157,
+                    160,
+                    161,
+                    162,
+                    165,
+                    166,
+                    167,
+                    168,
+                    169,
+                    170,
+                    183,
+                    184,
+                    185,
+                    188,
+                    189,
+                    190,
+                    193,
+                    194,
+                    195,
+                    198,
+                    199,
+                    200,
+                    203,
+                    204,
+                    205,
+                    226,
+                    227,
+                    228,
+                    229,
+                    230
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/github/bhlangonijr/chesslib/pgn/GameLoader.java#PgnTempContainer",
+                "location": [
+                    256
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "c-rack-cbor-java-cabd70d02e86": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/co/nstant/in/cbor/encoder/SpecialEncoder.java#encode",
+                "location": [
+                    50,
+                    51,
+                    65
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/co/nstant/in/cbor/model/SpecialType.java#ofByte",
+                "location": [
+                    8,
+                    21
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "davidmoten-word-wrap-e59eedf0bac7": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/davidmoten/text/utils/WordWrap.java#includeExtraWordChars",
+                "location": [
+                    232
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/davidmoten/text/utils/WordWrap.java#excludeExtraWordChars",
+                "location": [
+                    245
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "ezylang-EvalEx-7c39c5478a39": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/ezylang/evalex/parser/Tokenizer.java#parseNumberLiteral",
+                "location": [
+                    371,
+                    376
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/ezylang/evalex/parser/Tokenizer.java#isAtNumberChar",
+                "location": [
+                    488
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "giraud-reasonml-idea-plugin-11d991db162a": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/reason/ide/structure/StructureViewElement.java#buildModuleStructure",
+                "location": [
+                    180
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/reason/lang/ocaml/OclParser.java#parseSig",
+                "location": [
+                    560
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "giraud-reasonml-idea-plugin-69749af01bcf": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/reason/lang/ocaml/OclParser.java#parseOcamlNode",
+                "location": [
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/reason/lang/ocaml/OclParser.java#parseEq",
+                "location": [
+                    756,
+                    777,
+                    779,
+                    780,
+                    781,
+                    782
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "iipc-jwarc-e00ce46c1e36": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/org/netpreserve/jwarc/cdx/CdxRequestEncoder.java#encode",
+                "location": [
+                    30,
+                    36,
+                    38,
+                    42
+                ]
+            },
+            {
+                "faulty_method": "src/org/netpreserve/jwarc/cdx/CdxRequestEncoder.java#encodeJsonBody",
+                "location": [
+                    64,
+                    71
+                ]
+            }
+        ],
+        "builder": "maven-simple"
+    },
+    "iipc-jwarc-d47a479c9025": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/org/netpreserve/jwarc/cdx/CdxRequestEncoder.java#encodeFormBody",
+                "location": [
+                    59
+                ]
+            },
+            {
+                "faulty_method": "src/org/netpreserve/jwarc/cdx/CdxRequestEncoder.java#percentPlusEncode",
+                "location": [
+                    153
+                ]
+            }
+        ],
+        "builder": "maven-simple"
+    },
+    "jhy-jsoup-0121311b1bd5": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/UrlBuilder.java#build",
+                "location": [
+                    50,
+                    54
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/UrlBuilder.java#normalizeQuery",
+                "location": [
+                    89
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/UrlBuilder.java#normalizeRef",
+                "location": [
+                    94
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "jhy-jsoup-2f48a617fe48": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Element.java#shouldIndent",
+                "location": [
+                    1673
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Element.java#outerHtmlTail",
+                "location": [
+                    1704
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "jhy-jsoup-401c8b010e01": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java#insertEmpty",
+                "location": [
+                    270
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java#insertForm",
+                "location": [
+                    285
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "jhy-jsoup-4a278e9b8e9c": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/W3CDom.java#W3CBuilder",
+                "location": [
+                    353
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/W3CDom.java#head",
+                "location": [
+                    369,
+                    370,
+                    371
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "jhy-jsoup-8e8970650951": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Document.java#OutputSettings",
+                "location": [
+                    398
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Document.java#charset",
+                "location": [
+                    442
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Document.java#prepareEncoder",
+                "location": [
+                    459
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "jhy-jsoup-9de27fa7cd82": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/HttpConnection.java#addHeader",
+                "location": [
+                    451,
+                    461
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/HttpConnection.java#fixHeaderEncoding",
+                "location": [
+                    473
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/helper/HttpConnection.java#processResponseHeaders",
+                "location": [
+                    1165
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "jhy-jsoup-a90bae7928f9": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Comment.java#outerHtmlHead",
+                "location": [
+                    41
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/jsoup/nodes/Element.java#isInlineable",
+                "location": [
+                    1852,
+                    1853,
+                    1854,
+                    1855,
+                    1856,
+                    1858
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "klausbrunner-solarpositioning-79c0044373b4": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/net/e175/klaus/solarpositioning/Grena3.java#calculateSolarPosition",
+                "location": [
+                    71
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/net/e175/klaus/solarpositioning/SPA.java#calculateSolarPosition",
+                "location": [
+                    51
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/net/e175/klaus/solarpositioning/SPA.java#calculateSunriseTransitSet",
+                "location": [
+                    176
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "salesforce-grammaticus-cdf67a1ad578": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/force/i18n/grammar/impl/GrammaticalTermMapImpl.java#readObject",
+                "location": [
+                    170
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/force/i18n/grammar/impl/GrammaticalTermMapImpl.java#writeObject",
+                "location": [
+                    179
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "snowflakedb-snowflake-jdbc-002bc9bb528a": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/net/snowflake/client/jdbc/SnowflakeConnectString.java#parse",
+                "location": [
+                    156
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/net/snowflake/client/jdbc/SnowflakeDriver.java#connect",
+                "location": [
+                    178
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "snowflakedb-snowflake-jdbc-15a45aca6bcd": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/net/snowflake/client/jdbc/SnowflakeFileTransferAgent.java#parseCommand",
+                "location": [
+                    868
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/net/snowflake/client/jdbc/SnowflakeFileTransferAgent.java#expandFileNames",
+                "location": [
+                    1693
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "snowflakedb-snowflake-jdbc-7444f58c2aef": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/net/snowflake/client/config/SFClientConfigParser.java#loadSFClientConfig",
+                "location": [
+                    43
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/net/snowflake/client/config/SFClientConfigParser.java#getConfigFilePathFromJDBCJarLocation",
+                "location": [
+                    88,
+                    89,
+                    90
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "spring-projects-spring-guice-ce15b8e5802a": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/springframework/guice/module/SpringModule.java#getAnnotationForBeanDefinition",
+                "location": [
+                    207,
+                    208,
+                    209,
+                    210,
+                    211,
+                    212,
+                    213,
+                    214
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/springframework/guice/module/SpringModule.java#get",
+                "location": [
+                    423,
+                    424,
+                    425,
+                    428,
+                    429,
+                    430,
+                    431,
+                    432,
+                    433,
+                    434,
+                    435,
+                    437,
+                    441,
+                    442,
+                    443,
+                    446,
+                    447,
+                    450
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "spring-projects-spring-retry-c89b9516d976": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/springframework/retry/backoff/ExponentialBackOffPolicy.java#backOff",
+                "location": [
+                    248
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/springframework/retry/backoff/FixedBackOffPolicy.java#doBackOff",
+                "location": [
+                    100
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/springframework/retry/backoff/UniformRandomBackOffPolicy.java#doBackOff",
+                "location": [
+                    141
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "traccar-traccar-1d31ebe88f26": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Tk103ProtocolDecoder.java#decodeBms",
+                "location": [
+                    465,
+                    507
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Tk103ProtocolDecoder.java#decode",
+                "location": [
+                    540
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-33af2928a581": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java#decodeBinaryE",
+                "location": [
+                    512
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java#decode",
+                "location": [
+                    626
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-95fdfd770130": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeBasic",
+                "location": [
+                    839,
+                    840,
+                    841,
+                    842
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeVariant",
+                "location": [
+                    1424,
+                    1425
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-9ff9bd75fff9": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#hasStatus",
+                "location": [
+                    212
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeBasic",
+                "location": [
+                    807
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-a722658e5a3c": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/TotemProtocolDecoder.java#decode4",
+                "location": [
+                    398
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/TotemProtocolDecoder.java#decode",
+                "location": [
+                    520,
+                    521,
+                    522
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-ae1205dfdded": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java#decodeExtension",
+                "location": [
+                    336,
+                    337,
+                    338,
+                    339
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java#decodeLocation",
+                "location": [
+                    490
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-d4c204914f90": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeBasic",
+                "location": [
+                    830
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeVariant",
+                "location": [
+                    1411
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-ec2b7b64a83a": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Jt600FrameDecoder.java#decode",
+                "location": [
+                    38
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Jt600ProtocolDecoder.java#isLongFormat",
+                "location": [
+                    90
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Jt600ProtocolDecoder.java#decodeBinary",
+                "location": [
+                    126,
+                    128
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-f8fb3f67bc0b": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/TzoneProtocolDecoder.java#decodeTags",
+                "location": [
+                    214,
+                    215,
+                    232
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/TzoneProtocolDecoder.java#decode",
+                "location": [
+                    367,
+                    369
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "traccar-traccar-fa2a61f6487c": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeLbs",
+                "location": [
+                    361
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java#decodeVariant",
+                "location": [
+                    1488
+                ]
+            }
+        ],
+        "builder": "gradle"
+    },
+    "vmzakharov-dataframe-ec-e9eb4dbe0e70": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/io/github/vmzakharov/ecdataframe/dataframe/compare/ComparisonResult.java#leftIsNull",
+                "location": [
+                    51
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/io/github/vmzakharov/ecdataframe/dataframe/compare/ComparisonResult.java#rightIsNull",
+                "location": [
+                    56
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "w3c-epubcheck-0759a82ae407": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/adobe/epubcheck/opf/OPFChecker30.java#isBlessedAudioType",
+                "location": [
+                    568
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/adobe/epubcheck/ops/OPSHandler30.java#checkMimetypeMatches",
+                "location": [
+                    646
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "w3c-epubcheck-49aacb238c3e": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/com/adobe/epubcheck/tool/EpubChecker.java#run",
+                "location": [
+                    140
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/com/adobe/epubcheck/tool/EpubChecker.java#processArguments",
+                "location": [
+                    741,
+                    744,
+                    792
+                ]
+            }
+        ],
+        "builder": "maven"
+    },
+    "xtremexp-UT4X-Converter-e16bad18b562": {
+        "faulty_info": [
+            {
+                "faulty_method": "src/main/java/org/xtx/ut4converter/t3d/T3DSimpleProperty.java#readPropertyFromT3dLine",
+                "location": [
+                    108,
+                    148,
+                    149,
+                    150
+                ]
+            },
+            {
+                "faulty_method": "src/main/java/org/xtx/ut4converter/t3d/T3DSimpleProperty.java#writeProperty",
+                "location": [
+                    164,
+                    165,
+                    167,
+                    168,
+                    169,
+                    170,
+                    171,
+                    172
+                ]
+            }
+        ],
+        "builder": "maven"
+    }
+}

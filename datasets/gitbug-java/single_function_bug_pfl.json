@@ -1,0 +1,959 @@
+{
+    "AuthMe-ConfigMe-aa91a6b315ec": {
+        "file_path": "src/main/java/ch/jalu/configme/configurationdata/CommentsConfiguration.java",
+        "location": [
+            44
+        ]
+    },
+    "BrightSpots-rcv-c80e6272c83a": {
+        "file_path": "src/main/java/network/brightspots/rcv/ResultsWriter.java",
+        "location": [
+            378,
+            379,
+            380,
+            381,
+            389,
+            399,
+            413,
+            425
+        ]
+    },
+    "BrightSpots-rcv-076f75e2417a": {
+        "file_path": "src/main/java/network/brightspots/rcv/Tabulator.java",
+        "location": [
+            523,
+            524,
+            525,
+            551,
+            552,
+            553
+        ]
+    },
+    "IBM-JSONata4Java-1485a41ccf50": {
+        "file_path": "src/main/java/com/api/jsonata4java/expressions/OrderByOperator.java",
+        "location": [
+            38,
+            39,
+            40,
+            41,
+            42
+        ]
+    },
+    "LMAX-Exchange-Simple-DSL-7d81cd9e2951": {
+        "file_path": "src/main/java/com/lmax/simpledsl/internal/DslParamsParser.java",
+        "location": [
+            218
+        ]
+    },
+    "LMAX-Exchange-Simple-DSL-81182e58bd80": {
+        "file_path": "src/main/java/com/lmax/simpledsl/internal/DslParamsParser.java",
+        "location": [
+            315,
+            316
+        ]
+    },
+    "Moderocky-ByteSkript-1dce2997df7f": {
+        "file_path": "src/main/java/org/byteskript/skript/compiler/DebugSkriptCompiler.java",
+        "location": [
+            62,
+            64
+        ]
+    },
+    "TheAlgorithms-Java-4f1514980495": {
+        "file_path": "src/main/java/com/thealgorithms/maths/FindMin.java",
+        "location": [
+            33,
+            34,
+            35,
+            36
+        ]
+    },
+    "TheAlgorithms-Java-96c1a96647c9": {
+        "file_path": "src/main/java/com/thealgorithms/maths/FindMax.java",
+        "location": [
+            33,
+            34,
+            35,
+            36
+        ]
+    },
+    "TheAlgorithms-Java-e5c7a08874a6": {
+        "file_path": "src/main/java/com/thealgorithms/others/StackPostfixNotation.java",
+        "location": [
+            18
+        ]
+    },
+    "TheAlgorithms-Java-a3a2d845d563": {
+        "file_path": "src/main/java/com/thealgorithms/maths/Armstrong.java",
+        "location": [
+            21,
+            22,
+            23,
+            24,
+            25
+        ]
+    },
+    "assertj-assertj-vavr-f4d7f276e87c": {
+        "file_path": "src/main/java/org/assertj/vavr/api/AbstractSeqAssert.java",
+        "location": [
+            69
+        ]
+    },
+    "aws-aws-secretsmanager-jdbc-d25e52d637cf": {
+        "file_path": "src/main/java/com/amazonaws/secretsmanager/sql/AWSSecretsManagerPostgreSQLDriver.java",
+        "location": [
+            118,
+            120
+        ]
+    },
+    "awslabs-aws-java-nio-spi-for-s3-ea1044d51bb4": {
+        "file_path": "src/main/java/software/amazon/nio/spi/s3/S3FileSystem.java",
+        "location": [
+            185
+        ]
+    },
+    "awslabs-aws-java-nio-spi-for-s3-8ae86f85f328": {
+        "file_path": "src/main/java/software/amazon/nio/spi/s3/S3Path.java",
+        "location": [
+            615,
+            616,
+            617,
+            618
+        ]
+    },
+    "beanshell-beanshell-f345606a29bd": {
+        "file_path": "src/main/java/bsh/Operators.java",
+        "location": [
+            70,
+            71
+        ]
+    },
+    "cloudsimplus-cloudsimplus-61c8b942d1ec": {
+        "file_path": "src/main/java/org/cloudsimplus/hosts/HostAbstract.java",
+        "location": [
+            165
+        ]
+    },
+    "crawler-commons-crawler-commons-2c2cb3bf7a95": {
+        "file_path": "src/main/java/crawlercommons/robots/SimpleRobotRulesParser.java",
+        "location": [
+            495
+        ]
+    },
+    "crowdin-crowdin-api-client-java-f0f22b2b56d7": {
+        "file_path": "src/main/java/com/crowdin/client/core/http/impl/json/JacksonJsonTransformer.java",
+        "location": [
+            47
+        ]
+    },
+    "damianszczepanik-cucumber-reporting-f11e9867941b": {
+        "file_path": "src/main/java/net/masterthought/cucumber/generators/FeatureReportPage.java",
+        "location": [
+            24
+        ]
+    },
+    "davidmoten-openapi-to-plantuml-773340861981": {
+        "file_path": "src/main/java/com/github/davidmoten/oas3/puml/Converter.java",
+        "location": [
+            128,
+            129
+        ]
+    },
+    "dmak-jaxb-xew-plugin-f48935133d6a": {
+        "file_path": "src/main/java/com/sun/tools/xjc/addon/xew/XmlElementWrapperPlugin.java",
+        "location": [
+            907,
+            908,
+            909,
+            912
+        ]
+    },
+    "fishercoder1534-Leetcode-2110c6b023b7": {
+        "file_path": "src/main/java/com/fishercoder/solutions/_235.java",
+        "location": [
+            12,
+            13,
+            14,
+            15
+        ]
+    },
+    "fusesource-jansi-58260c6ce08c": {
+        "file_path": "src/main/java/org/fusesource/jansi/AnsiRenderer.java",
+        "location": [
+            102
+        ]
+    },
+    "giraud-reasonml-idea-plugin-f665f0fc21e6": {
+        "file_path": "src/main/java/com/reason/lang/rescript/ResParser.java",
+        "location": [
+            1076,
+            1118
+        ]
+    },
+    "iipc-jwarc-62dffb16a1a8": {
+        "file_path": "src/org/netpreserve/jwarc/WarcParser.java",
+        "location": [
+            246,
+            253,
+            254,
+            255,
+            256,
+            257,
+            258,
+            259,
+            265
+        ]
+    },
+    "iipc-jwarc-6c7083b72172": {
+        "file_path": "src/org/netpreserve/jwarc/WarcParser.java",
+        "location": [
+            238,
+            239
+        ]
+    },
+    "jhy-jsoup-29be991198d3": {
+        "file_path": "src/main/java/org/jsoup/nodes/TextNode.java",
+        "location": [
+            96,
+            99,
+            100,
+            101,
+            102
+        ]
+    },
+    "jhy-jsoup-9e5869b6e1e2": {
+        "file_path": "src/main/java/org/jsoup/nodes/TextNode.java",
+        "location": [
+            88,
+            89,
+            91,
+            92,
+            93
+        ]
+    },
+    "jhy-jsoup-111919256590": {
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "location": [
+            1854
+        ]
+    },
+    "jhy-jsoup-1657e8fd6588": {
+        "file_path": "src/main/java/org/jsoup/nodes/DataNode.java",
+        "location": [
+            43
+        ]
+    },
+    "jhy-jsoup-1e69577e358c": {
+        "file_path": "src/main/java/org/jsoup/helper/UrlBuilder.java",
+        "location": [
+            41,
+            42,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            58
+        ]
+    },
+    "jhy-jsoup-220a3b21be3b": {
+        "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+        "location": [
+            623,
+            626,
+            627,
+            633
+        ]
+    },
+    "jhy-jsoup-2a4a9cf83dea": {
+        "file_path": "src/main/java/org/jsoup/select/StructuralEvaluator.java",
+        "location": [
+            192
+        ]
+    },
+    "jhy-jsoup-45ed00232722": {
+        "file_path": "src/main/java/org/jsoup/helper/HttpConnection.java",
+        "location": [
+            129,
+            130,
+            131,
+            132
+        ]
+    },
+    "jhy-jsoup-5f20fcc2f728": {
+        "file_path": "src/main/java/org/jsoup/safety/Safelist.java",
+        "location": [
+            250
+        ]
+    },
+    "jhy-jsoup-6ccd158754e2": {
+        "file_path": "src/main/java/org/jsoup/helper/UrlBuilder.java",
+        "location": [
+            92
+        ]
+    },
+    "jhy-jsoup-8e2b86839b27": {
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "location": [
+            1847
+        ]
+    },
+    "jhy-jsoup-9bb07d2ab43c": {
+        "file_path": "src/main/java/org/jsoup/nodes/Node.java",
+        "location": [
+            483
+        ]
+    },
+    "jhy-jsoup-a349582236a7": {
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "location": [
+            1849,
+            1850,
+            1851
+        ]
+    },
+    "jhy-jsoup-a96ebc95f9ad": {
+        "file_path": "src/main/java/org/jsoup/helper/HttpConnection.java",
+        "location": [
+            130,
+            132
+        ]
+    },
+    "jhy-jsoup-d126488db626": {
+        "file_path": "src/main/java/org/jsoup/select/QueryParser.java",
+        "location": [
+            154,
+            157,
+            158
+        ]
+    },
+    "jhy-jsoup-e52224fbfe66": {
+        "file_path": "src/main/java/org/jsoup/nodes/TextNode.java",
+        "location": [
+            101
+        ]
+    },
+    "jhy-jsoup-f0ae81b13eb3": {
+        "file_path": "src/main/java/org/jsoup/parser/TokeniserState.java",
+        "location": [
+            189
+        ]
+    },
+    "jhy-jsoup-f2913bd731f1": {
+        "file_path": "src/main/java/org/jsoup/nodes/TextNode.java",
+        "location": [
+            98,
+            101
+        ]
+    },
+    "jitterted-ensembler-0963194c9ebc": {
+        "file_path": "src/main/java/com/jitterted/mobreg/adapter/in/web/member/EnsembleSummaryView.java",
+        "location": [
+            132
+        ]
+    },
+    "jitterted-ensembler-0e512e5b3677": {
+        "file_path": "src/main/java/com/jitterted/mobreg/adapter/in/web/member/EnsembleSummaryView.java",
+        "location": [
+            40
+        ]
+    },
+    "jitterted-ensembler-14a39138787f": {
+        "file_path": "src/main/java/com/jitterted/mobreg/domain/Ensemble.java",
+        "location": [
+            71
+        ]
+    },
+    "jitterted-ensembler-60ec3bf0273b": {
+        "file_path": "src/main/java/com/jitterted/mobreg/domain/Ensemble.java",
+        "location": [
+            99
+        ]
+    },
+    "jitterted-ensembler-6207c9d46460": {
+        "file_path": "src/main/java/com/jitterted/mobreg/domain/Ensemble.java",
+        "location": [
+            83,
+            85
+        ]
+    },
+    "jitterted-ensembler-c9faf3fba524": {
+        "file_path": "src/main/java/com/jitterted/mobreg/adapter/in/web/member/EnsembleSummaryView.java",
+        "location": [
+            121,
+            125,
+            133
+        ]
+    },
+    "klausbrunner-solarpositioning-4d35aecb4840": {
+        "file_path": "src/main/java/net/e175/klaus/solarpositioning/DeltaT.java",
+        "location": [
+            66,
+            67,
+            68,
+            69,
+            70,
+            72,
+            73
+        ]
+    },
+    "mthmulders-mcs-12a39786d753": {
+        "file_path": "src/main/java/it/mulders/mcs/search/SearchCommandHandler.java",
+        "location": [
+            30
+        ]
+    },
+    "mthmulders-mcs-eff905bef8d8": {
+        "file_path": "src/main/java/it/mulders/mcs/search/printer/TabularOutputPrinter.java",
+        "location": [
+            64
+        ]
+    },
+    "nikoo28-java-solutions-8d81307ea165": {
+        "file_path": "src/main/java/leetcode/medium/OnlineStockSpan.java",
+        "location": [
+            38
+        ]
+    },
+    "retel-io-ari-proxy-610e9b6725e1": {
+        "file_path": "src/main/java/io/retel/ariproxy/boundary/commandsandresponses/AriCommandResponseProcessing.java",
+        "location": [
+            20
+        ]
+    },
+    "revelc-formatter-maven-plugin-3e9843d2ab99": {
+        "file_path": "src/main/java/net/revelc/code/formatter/css/CssFormatter.java",
+        "location": [
+            62
+        ]
+    },
+    "semver4j-semver4j-10102b374298": {
+        "file_path": "src/main/java/org/semver4j/RangesList.java",
+        "location": [
+            84
+        ]
+    },
+    "semver4j-semver4j-beb7e5d466c7": {
+        "file_path": "src/main/java/org/semver4j/internal/range/processor/XRangeProcessor.java",
+        "location": [
+            50,
+            51,
+            52,
+            67,
+            70
+        ]
+    },
+    "slub-urnlib-106be8d1b804": {
+        "file_path": "src/main/java/de/slub/urn/RQF_RFC8141.java",
+        "location": [
+            96,
+            102
+        ]
+    },
+    "snowflakedb-snowflake-jdbc-f2c8eba73535": {
+        "file_path": "src/main/java/net/snowflake/client/jdbc/RestRequest.java",
+        "location": [
+            449
+        ]
+    },
+    "spring-projects-spring-retry-e6091f790c64": {
+        "file_path": "src/main/java/org/springframework/retry/backoff/BackOffPolicyBuilder.java",
+        "location": [
+            270
+        ]
+    },
+    "st-tu-dresden-salespoint-85a764f892aa": {
+        "file_path": "src/main/java/org/salespointframework/accountancy/PersistentAccountancy.java",
+        "location": [
+            65
+        ]
+    },
+    "stellar-java-stellar-sdk-1461c2fc5b89": {
+        "file_path": "src/main/java/org/stellar/sdk/Transaction.java",
+        "location": [
+            405
+        ]
+    },
+    "stellar-java-stellar-sdk-15cc6d2c8131": {
+        "file_path": "src/main/java/org/stellar/sdk/KeyPair.java",
+        "location": [
+            311
+        ]
+    },
+    "stellar-java-stellar-sdk-6e9badb007c2": {
+        "file_path": "src/main/java/org/stellar/sdk/SorobanServer.java",
+        "location": [
+            427,
+            428,
+            437,
+            438,
+            439,
+            440,
+            441,
+            442
+        ]
+    },
+    "traccar-traccar-007b4007e063": {
+        "file_path": "src/main/java/org/traccar/protocol/TopinProtocolDecoder.java",
+        "location": [
+            219
+        ]
+    },
+    "traccar-traccar-03650fff8064": {
+        "file_path": "src/main/java/org/traccar/protocol/GalileoFrameDecoder.java",
+        "location": [
+            35,
+            36,
+            37
+        ]
+    },
+    "traccar-traccar-046076aeb6f0": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            806
+        ]
+    },
+    "traccar-traccar-0f8dd92a6b1b": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            1031
+        ]
+    },
+    "traccar-traccar-105873ab5256": {
+        "file_path": "src/main/java/org/traccar/protocol/Minifinder2ProtocolDecoder.java",
+        "location": [
+            327
+        ]
+    },
+    "traccar-traccar-1a1126d2d392": {
+        "file_path": "src/main/java/org/traccar/protocol/SuntechProtocolDecoder.java",
+        "location": [
+            276
+        ]
+    },
+    "traccar-traccar-1b8993293646": {
+        "file_path": "src/main/java/org/traccar/protocol/FifotrackProtocolDecoder.java",
+        "location": [
+            238
+        ]
+    },
+    "traccar-traccar-1c91d35263f1": {
+        "file_path": "src/main/java/org/traccar/protocol/WatchProtocolDecoder.java",
+        "location": [
+            142,
+            153,
+            154
+        ]
+    },
+    "traccar-traccar-230f629c3dce": {
+        "file_path": "src/main/java/org/traccar/protocol/RuptelaProtocolDecoder.java",
+        "location": [
+            250,
+            262
+        ]
+    },
+    "traccar-traccar-2749e520c9ea": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            756
+        ]
+    },
+    "traccar-traccar-3331593759a2": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            850
+        ]
+    },
+    "traccar-traccar-3642b9520863": {
+        "file_path": "src/main/java/org/traccar/protocol/HuaShengProtocolDecoder.java",
+        "location": [
+            287
+        ]
+    },
+    "traccar-traccar-3771dd156efb": {
+        "file_path": "src/main/java/org/traccar/protocol/WatchProtocolDecoder.java",
+        "location": [
+            141
+        ]
+    },
+    "traccar-traccar-37ed394724c0": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            844
+        ]
+    },
+    "traccar-traccar-392f00082faf": {
+        "file_path": "src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java",
+        "location": [
+            422
+        ]
+    },
+    "traccar-traccar-3b6900a95342": {
+        "file_path": "src/main/java/org/traccar/protocol/Minifinder2ProtocolDecoder.java",
+        "location": [
+            154
+        ]
+    },
+    "traccar-traccar-3dad196b882c": {
+        "file_path": "src/main/java/org/traccar/protocol/HuaShengProtocolDecoder.java",
+        "location": [
+            256,
+            297
+        ]
+    },
+    "traccar-traccar-413d9a49c41a": {
+        "file_path": "src/main/java/org/traccar/protocol/HuaShengProtocolDecoder.java",
+        "location": [
+            232,
+            267,
+            268
+        ]
+    },
+    "traccar-traccar-4722f9b6b648": {
+        "file_path": "src/main/java/org/traccar/protocol/GalileoProtocolDecoder.java",
+        "location": [
+            275,
+            278,
+            291,
+            292,
+            293,
+            294,
+            295,
+            296
+        ]
+    },
+    "traccar-traccar-4a5b8d79b560": {
+        "file_path": "src/main/java/org/traccar/protocol/StarcomProtocolDecoder.java",
+        "location": [
+            78
+        ]
+    },
+    "traccar-traccar-4a64ef748e20": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            486,
+            695
+        ]
+    },
+    "traccar-traccar-4ece72558c80": {
+        "file_path": "src/main/java/org/traccar/protocol/TeltonikaProtocolDecoder.java",
+        "location": [
+            613,
+            614
+        ]
+    },
+    "traccar-traccar-514582dd83c4": {
+        "file_path": "src/main/java/org/traccar/protocol/TramigoFrameDecoder.java",
+        "location": [
+            36
+        ]
+    },
+    "traccar-traccar-553527d9fbe6": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            490
+        ]
+    },
+    "traccar-traccar-5a1a8d9192ee": {
+        "file_path": "src/main/java/org/traccar/protocol/T622IridiumProtocolDecoder.java",
+        "location": [
+            97
+        ]
+    },
+    "traccar-traccar-5c26f25b3b0a": {
+        "file_path": "src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java",
+        "location": [
+            557,
+            558,
+            559,
+            560,
+            562,
+            563,
+            564,
+            565
+        ]
+    },
+    "traccar-traccar-5da3b8fcb480": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            540
+        ]
+    },
+    "traccar-traccar-5e18cb586d34": {
+        "file_path": "src/main/java/org/traccar/protocol/Gl200TextProtocolDecoder.java",
+        "location": [
+            403,
+            445,
+            446,
+            448,
+            449,
+            475,
+            476
+        ]
+    },
+    "traccar-traccar-5f56a56d7721": {
+        "file_path": "src/main/java/org/traccar/protocol/Tk103ProtocolDecoder.java",
+        "location": [
+            480
+        ]
+    },
+    "traccar-traccar-65f54c200cf0": {
+        "file_path": "src/main/java/org/traccar/protocol/TeltonikaProtocolDecoder.java",
+        "location": [
+            591
+        ]
+    },
+    "traccar-traccar-6631d7c4b352": {
+        "file_path": "src/main/java/org/traccar/protocol/WatchFrameDecoder.java",
+        "location": [
+            31,
+            32
+        ]
+    },
+    "traccar-traccar-6e5481ebb185": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            348
+        ]
+    },
+    "traccar-traccar-6f59f756a7d3": {
+        "file_path": "src/main/java/org/traccar/protocol/T800xProtocolDecoder.java",
+        "location": [
+            394
+        ]
+    },
+    "traccar-traccar-7325030436e5": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            1385,
+            1387,
+            1388,
+            1389,
+            1391,
+            1392,
+            1394,
+            1395,
+            1396,
+            1397
+        ]
+    },
+    "traccar-traccar-779486a30483": {
+        "file_path": "src/main/java/org/traccar/protocol/LaipacProtocolDecoder.java",
+        "location": [
+            234,
+            264
+        ]
+    },
+    "traccar-traccar-782fd787d14b": {
+        "file_path": "src/main/java/org/traccar/protocol/TramigoProtocolDecoder.java",
+        "location": [
+            156,
+            157,
+            175,
+            194
+        ]
+    },
+    "traccar-traccar-7ce4fb9a628f": {
+        "file_path": "src/main/java/org/traccar/protocol/StartekProtocolDecoder.java",
+        "location": [
+            181
+        ]
+    },
+    "traccar-traccar-8638bc8ab98f": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            492,
+            493
+        ]
+    },
+    "traccar-traccar-8ae0436e5edb": {
+        "file_path": "src/main/java/org/traccar/protocol/Gl200TextProtocolDecoder.java",
+        "location": [
+            959
+        ]
+    },
+    "traccar-traccar-8b4d3ee0b964": {
+        "file_path": "src/main/java/org/traccar/protocol/MiniFinderProtocolDecoder.java",
+        "location": [
+            146,
+            164
+        ]
+    },
+    "traccar-traccar-8de9a36abef8": {
+        "file_path": "src/main/java/org/traccar/protocol/GoSafeProtocolDecoder.java",
+        "location": [
+            96,
+            97,
+            99,
+            100,
+            102,
+            103
+        ]
+    },
+    "traccar-traccar-94fbc93f8b0a": {
+        "file_path": "src/main/java/org/traccar/protocol/AtrackProtocolDecoder.java",
+        "location": [
+            617
+        ]
+    },
+    "traccar-traccar-9a1cbeb7b754": {
+        "file_path": "src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java",
+        "location": [
+            557,
+            558
+        ]
+    },
+    "traccar-traccar-9aef1bfcffa0": {
+        "file_path": "src/main/java/org/traccar/protocol/T55ProtocolDecoder.java",
+        "location": [
+            424
+        ]
+    },
+    "traccar-traccar-a8a06ffd494f": {
+        "file_path": "src/main/java/org/traccar/protocol/Gl200TextProtocolDecoder.java",
+        "location": [
+            1404
+        ]
+    },
+    "traccar-traccar-a9c311855a49": {
+        "file_path": "src/main/java/org/traccar/protocol/PuiProtocolDecoder.java",
+        "location": [
+            54
+        ]
+    },
+    "traccar-traccar-b3c6e22fc19c": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            831
+        ]
+    },
+    "traccar-traccar-b77131f4be38": {
+        "file_path": "src/main/java/org/traccar/protocol/WatchProtocolDecoder.java",
+        "location": [
+            266,
+            282,
+            294
+        ]
+    },
+    "traccar-traccar-bc99846b0c88": {
+        "file_path": "src/main/java/org/traccar/protocol/Gl200TextProtocolDecoder.java",
+        "location": [
+            1362
+        ]
+    },
+    "traccar-traccar-c024d09744de": {
+        "file_path": "src/main/java/org/traccar/protocol/Minifinder2ProtocolEncoder.java",
+        "location": [
+            56
+        ]
+    },
+    "traccar-traccar-cadcd2676adb": {
+        "file_path": "src/main/java/org/traccar/protocol/KhdProtocolDecoder.java",
+        "location": [
+            207
+        ]
+    },
+    "traccar-traccar-d244b4bc4999": {
+        "file_path": "src/main/java/org/traccar/model/ExtendedModel.java",
+        "location": [
+            94
+        ]
+    },
+    "traccar-traccar-d2ce5af34782": {
+        "file_path": "src/main/java/org/traccar/protocol/Gt06ProtocolDecoder.java",
+        "location": [
+            809
+        ]
+    },
+    "traccar-traccar-d4efbfa2a7d9": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            504,
+            505,
+            514,
+            601,
+            602
+        ]
+    },
+    "traccar-traccar-d797671b2ce6": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            916,
+            928,
+            959
+        ]
+    },
+    "traccar-traccar-dfc546a26f5b": {
+        "file_path": "src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java",
+        "location": [
+            556
+        ]
+    },
+    "traccar-traccar-e73f36db83b9": {
+        "file_path": "src/main/java/org/traccar/protocol/Gl200TextProtocolDecoder.java",
+        "location": [
+            981
+        ]
+    },
+    "traccar-traccar-ed3950fbdccf": {
+        "file_path": "src/main/java/org/traccar/protocol/GatorProtocolEncoder.java",
+        "location": [
+            94
+        ]
+    },
+    "traccar-traccar-ee3cbd4aba2e": {
+        "file_path": "src/main/java/org/traccar/protocol/HuabaoProtocolDecoder.java",
+        "location": [
+            764
+        ]
+    },
+    "traccar-traccar-f1de2533c352": {
+        "file_path": "src/main/java/org/traccar/protocol/WatchFrameDecoder.java",
+        "location": [
+            30
+        ]
+    },
+    "traccar-traccar-f4d10160d951": {
+        "file_path": "src/main/java/org/traccar/protocol/Minifinder2ProtocolDecoder.java",
+        "location": [
+            279
+        ]
+    },
+    "traccar-traccar-f92bde208800": {
+        "file_path": "src/main/java/org/traccar/protocol/AtrackProtocolDecoder.java",
+        "location": [
+            432
+        ]
+    },
+    "traccar-traccar-fdbd269b9b99": {
+        "file_path": "src/main/java/org/traccar/protocol/FreematicsProtocolDecoder.java",
+        "location": [
+            156
+        ]
+    },
+    "vmzakharov-dataframe-ec-12af99192d24": {
+        "file_path": "src/main/java/io/github/vmzakharov/ecdataframe/dsl/value/StringValue.java",
+        "location": [
+            33
+        ]
+    },
+    "w3c-epubcheck-7804c78a53f2": {
+        "file_path": "src/main/java/org/w3c/epubcheck/core/references/ResourceReferencesChecker.java",
+        "location": [
+            110
+        ]
+    },
+    "xtremexp-UT4X-Converter-e719841eb260": {
+        "file_path": "src/main/java/org/xtx/ut4converter/t3d/T3DActor.java",
+        "location": [
+            782
+        ]
+    }
+}

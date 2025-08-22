@@ -1,0 +1,7 @@
+{
+  "JAVA_7_HOME": "<Path to JDK1.7>",
+  "JAVA_8_HOME": "<Path to JDK1.8>",
+  "Defects4J_DIR": "<Path to defects4jv1.2>",
+  "Defects4J_V2_DIR": "<Path to defects4jv1.2>",
+  "TEMP_DIR": "/tmp"
+}

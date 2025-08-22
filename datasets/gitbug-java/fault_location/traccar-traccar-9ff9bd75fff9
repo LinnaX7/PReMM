@@ -1,0 +1,2 @@
+org.traccar.protocol.Gt06ProtocolDecoder.hasStatus:212
+org.traccar.protocol.Gt06ProtocolDecoder.decodeBasic:807

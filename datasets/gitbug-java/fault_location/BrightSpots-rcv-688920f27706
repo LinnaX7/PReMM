@@ -1,0 +1,5 @@
+network.brightspots.rcv.Logger.addTabulationFileLogging:98
+network.brightspots.rcv.Logger.removeTabulationFileLogging:119
+network.brightspots.rcv.ResultsWriter.generateJsonFile:118
+network.brightspots.rcv.ResultsWriter.generateSummarySpreadsheet:388
+network.brightspots.rcv.ResultsWriter.writeGenericCvrCsv:556

@@ -1,0 +1,3 @@
+app.DBApp.takeAction:187
+util.validation.Validator.validateTableCreation:37||util.validation.Validator.validateTableCreation:38
+util.validation.Validator.sameColMinMax:89||util.validation.Validator.sameColMinMax:90||util.validation.Validator.sameColMinMax:91

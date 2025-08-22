@@ -1,0 +1,4 @@
+{
+  "gitbug_repo": "Path to Gitbug-Java repository",
+  "conda_env_name": "Conda environment name for Gitbug-Java"
+}

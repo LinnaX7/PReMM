@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "PReMM"
+version = "0.1.0"
+description = "PReMM: LLM-Based Program Repair for Multi-Method Bugs via Divide and Conquer"
+authors = ["author"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = "^0.32.0"
+pyowm = "^3.3.0"
+langchain = "0.1.10"
+langgraph = "0.0.50"
+langchain-community = "0.0.38"
+pydantic = "2.7.0"
+javalang = "0.13.0"
+jpype1 = "1.5.0"
+dashscope = "^1.20.3"
+
+
+[[tool.poetry.source]]
+name = "huaweicloud"
+url = "https://repo.huaweicloud.com/repository/pypi/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,2 @@
+org.traccar.protocol.HuabaoProtocolDecoder.decodeExtension:336||org.traccar.protocol.HuabaoProtocolDecoder.decodeExtension:337||org.traccar.protocol.HuabaoProtocolDecoder.decodeExtension:338||org.traccar.protocol.HuabaoProtocolDecoder.decodeExtension:339
+org.traccar.protocol.HuabaoProtocolDecoder.decodeLocation:490

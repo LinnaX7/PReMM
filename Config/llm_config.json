@@ -1,0 +1,24 @@
+{
+    "DeepSeek-V3": {
+        "api_key": "<Your own api key>",
+        "model_name": "deepseek-chat",
+        "base_url": "https://api.deepseek.com/v1"
+    },
+    "Qwen2.5-32B":{
+        "api_key": "<Your own api key>",
+        "model_name": "qwen2.5-32b-instruct",
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    },
+    "Qwen2.5-72B":{
+        "api_key": "<Your own api key>",
+        "model_name": "qwen2.5-72b-instruct",
+        "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    },
+    "Qwen2.5-72B-Local":{
+        "api_key": "EMPTY",
+        "model_name": "Qwen2.5-72B",
+        "base_url": "http://210.28.132.64:12345/v1"
+    },
+    "CurrentLLM": "Qwen2.5-72B-Local"
+
+}

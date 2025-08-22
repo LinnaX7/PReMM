@@ -1,0 +1,2 @@
+org.traccar.protocol.WatchProtocolDecoder.decodePosition:465||org.traccar.protocol.WatchProtocolDecoder.decodePosition:507
+org.traccar.protocol.WatchProtocolDecoder.decode:540

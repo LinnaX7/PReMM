@@ -1,0 +1,2 @@
+net.snowflake.client.config.SFClientConfigParser.loadSFClientConfig:43
+net.snowflake.client.config.SFClientConfigParser.getConfigFilePathFromJDBCJarLocation:88||net.snowflake.client.config.SFClientConfigParser.getConfigFilePathFromJDBCJarLocation:89||net.snowflake.client.config.SFClientConfigParser.getConfigFilePathFromJDBCJarLocation:90

@@ -1,0 +1,2 @@
+org.traccar.protocol.MeitrackProtocolDecoder.decodeBinaryE:512
+org.traccar.protocol.MeitrackProtocolDecoder.decode:626

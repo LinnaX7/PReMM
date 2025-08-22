@@ -1,0 +1,129 @@
+stderr.txt
+output
+tmp
+analysis_output
+# Byte-compiled / optimized / DLL files
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyc~
+*.pyw~
+*.pyz~
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Installation directories
+/build/
+/dist/
+*.egg-info/
+eggs/
+bin/
+develop-eggs/
+
+# PyInstaller
+/build/
+/dist/
+/__pycache__
+*.spec
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+.pytest_cache
+nosetests.xml
+coverage.xml
+htmlcov/
+.tox/
+.mypy_cache/
+.pytype/
+pytestdebug.log
+__pycache__/
+
+# Documentation
+docs/_build/
+*.md.runs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IPython profile
+profile_default/
+ipython_config.py
+
+# Django specific
+*.log
+local_settings.py
+db.sqlite3
+media/
+static/
+
+# Flask specific
+instance/
+.webassets-cache
+
+# Scrapy project metadata
+.scrapy
+
+# Sphinx documentation
+_docs/
+build/
+
+# Environments
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.kpf
+*.kpr
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sqlite
+*.sql
+*.sqlite3
+*.jsonl
+*.csv
+*.out
+*.err
+
+# Artifacts
+artifacts/
+output/
+results/
+tmp/
+temp/
+
+# Poetry
+poetry.lock
+.cache/
+__pypackages__
+
+# Pipenv
+Pipfile
+Pipfile.lock

@@ -1,0 +1,2 @@
+org.netpreserve.jwarc.cdx.CdxRequestEncoder.encode:30||org.netpreserve.jwarc.cdx.CdxRequestEncoder.encode:36||org.netpreserve.jwarc.cdx.CdxRequestEncoder.encode:38||org.netpreserve.jwarc.cdx.CdxRequestEncoder.encode:42
+org.netpreserve.jwarc.cdx.CdxRequestEncoder.encodeJsonBody:64||org.netpreserve.jwarc.cdx.CdxRequestEncoder.encodeJsonBody:71

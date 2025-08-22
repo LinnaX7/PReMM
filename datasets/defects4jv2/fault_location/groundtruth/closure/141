@@ -1,0 +1,2 @@
+com.google.javascript.jscomp.PureFunctionIdentifier.getCallableDefinitions:177||com.google.javascript.jscomp.PureFunctionIdentifier.getCallableDefinitions:179||com.google.javascript.jscomp.PureFunctionIdentifier.getCallableDefinitions:180||com.google.javascript.jscomp.PureFunctionIdentifier.getCallableDefinitions:181||com.google.javascript.jscomp.PureFunctionIdentifier.getCallableDefinitions:198
+com.google.javascript.jscomp.NodeUtil.canBeSideEffected:601

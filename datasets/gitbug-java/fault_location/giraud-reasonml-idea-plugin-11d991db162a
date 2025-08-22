@@ -1,0 +1,4 @@
+com.reason.ide.structure.StructureViewElement.getLocationString:90
+com.reason.ide.structure.StructureViewElement.getIcon:101
+com.reason.ide.structure.StructureViewElement.buildModuleStructure:180
+com.reason.lang.ocaml.OclParser.parseSig:560

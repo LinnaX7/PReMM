@@ -1,0 +1,2 @@
+org.traccar.protocol.TzoneProtocolDecoder.decodeTags:214||org.traccar.protocol.TzoneProtocolDecoder.decodeTags:215||org.traccar.protocol.TzoneProtocolDecoder.decodeTags:232
+org.traccar.protocol.TzoneProtocolDecoder.decode:367||org.traccar.protocol.TzoneProtocolDecoder.decode:369
