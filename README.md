@@ -1,5 +1,5 @@
 # PReMM: LLM-Based Program Repair for Multi-Method Bugs via Divide and Conquer
-
+[![DOI](https://zenodo.org/badge/1006978798.svg)](https://doi.org/10.5281/zenodo.16927560)
 ---
 
 ## 1. Introduction
