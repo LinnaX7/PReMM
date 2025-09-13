@@ -161,7 +161,8 @@ def get_output_prompt(role, a_state: AgentState):
             "Keep your answer concise.")
     if role == 'repairer':
         return "".join([
-            "Finally, output the repaired code snippets. Present the output in an array format, where each element is a JSON object containing two fields: "
-            " 'repair_code' (the repair code for the entire method),",
-        " and 'fault_method_signature' (the signature of the faulty method).\n"])
+            "Finally, output the repaired code snippets. Present the output in an array format, where each element is a JSON object containing three fields: "
+            "'fault_method_signature' (the signature of the faulty method),"
+            "'repair_code' (the repair code for the entire method)."
+            " and'repair_reason' (describing the intended purpose of the repair action).\n"])
     return ""
