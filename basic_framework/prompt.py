@@ -9,7 +9,8 @@ def get_fault_programs_pfl_prompt(fault_codes: dict):
         content += f"The No.{i} fault method is:\n"
         content += f"\"fault_method_signature\": {fault_signature}\n"
         content += f"\"fault_code\":\n{fault_code_info['fault_code']}\n"
-        content += f"where lines in {fault_code_info.get('fault_lines')} are suspicious and these suspicious codes are {fault_code_info.get('fault_line_codes')}.\n"
+        if utils.IS_PERFECT_FAULT_LOCALIZATION:
+            content += f"where lines in {fault_code_info.get('fault_lines')} are suspicious and these suspicious codes are {fault_code_info.get('fault_line_codes')}.\n"
         i += 1
     return content
 

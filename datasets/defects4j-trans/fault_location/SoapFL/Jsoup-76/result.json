@@ -1,0 +1,25 @@
+{
+    "buggy_classes": [
+        "org.jsoup.parser.HtmlTreeBuilderState"
+    ],
+    "buggy_methods": [
+        {
+            "method_name": "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)",
+            "method_code": "```java\n    private static boolean isWhitespace(Token t) {\n        if (t.isCharacter()) {\n            String data = t.asCharacter().getData();\n            return isWhitespace(data);\n        }\n        return false;\n    }\n\n```",
+            "method_doc": "This method checks if a token represents whitespace characters by verifying if it's a character token and then calling the isWhitespace(String) method to validate the character data.",
+            "class_name": "org.jsoup.parser.HtmlTreeBuilderState",
+            "class_doc": "",
+            "test_failure_causes": "As the Software Test Engineer at DebugDev, I'll analyze this test failure step by step to identify the root cause in the production code.\n\n## Step 1: Test Behavior Analysis\n\nThe test `preSkipsFirstNewline` is specifically testing how the HTML parser handles `<pre>` elements with leading newlines. The key observations are:\n\n- **HTML Input**: `<pre>\\n\\nOne\\nTwo\\n</pre>` (two consecutive newlines after opening tag)\n- **Expected `wholeText()`**: `\"\\nOne\\nTwo\\n\"` (preserves the first newline)\n- **Actual `wholeText()`**: `\"[\\n]One\\nTwo\\n\"` (appears to be skipping or incorrectly handling the first newline)\n\nThe test output shows the discrepancy clearly - the expected result includes the leading newline, while the actual result seems to have some different whitespace handling.\n\n## Step 2: Pattern Identification\n\nFrom the test behavior and failure details, I can identify these key patterns:\n\n1. **Context**: The issue occurs specifically with `<pre>` elements\n2. **Trigger**: Leading newline characters immediately after the opening `<pre>` tag\n3. **Method affected**: `wholeText()` method behavior\n4. **Nature of defect**: Whitespace/newline preservation logic in HTML parsing\n\n## Step 3: Production Code Defect Hypothesis\n\nBased on my analysis, the likely defect in the production code is:\n\n**The HTML parser's preprocessing logic for `<pre>` elements is incorrectly skipping or normalizing the first newline character that appears immediately after the opening `<pre>` tag.**\n\n### Specific Defect Location:\nThe bug likely resides in the HTML tokenization or tree building phase where the parser handles whitespace in `<pre>` elements. There's probably logic intended to handle whitespace normalization that's being over-applied to `<pre>` elements, despite `<pre>` tags requiring whitespace preservation.\n\n### Expected vs Actual Behavior:\n- **Expected**: `wholeText()` should preserve ALL original whitespace, including leading newlines in `<pre>` elements\n- **Actual**: The first newline after `<pre>` is being incorrectly processed or skipped\n\n### Recommended Investigation Areas:\n1. The HTML tokenizer's whitespace handling logic for `<pre>` elements\n2. The tree builder's element insertion logic when encountering `<pre>` tags with leading whitespace\n3. The `wholeText()` method's data source - whether it's getting normalized text instead of raw text\n\nThis defect is consistent with HTML parsing logic that incorrectly applies general whitespace normalization rules to `<pre>` elements, which should preserve whitespace exactly as written in the source HTML.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 7,
+            "reason": "#7# The isWhitespace method is suspicious because it handles whitespace detection for tokens, and the test failure involves incorrect whitespace handling in pre elements. Since pre elements should preserve whitespace including newlines, any incorrect whitespace classification in this method could affect how the parser processes leading newlines in pre tags, causing the observed discrepancy in wholeText() output."
+        }
+    ],
+    "buggy_codes": {
+        "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)": {
+            "method_name": "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)",
+            "method_code": "```java\n    private static boolean isWhitespace(Token t) {\n        if (t.isCharacter()) {\n            String data = t.asCharacter().getData();\n            return isWhitespace(data);\n        }\n        return false;\n    }\n\n```",
+            "method_doc": "This method checks if a token represents whitespace characters by verifying if it's a character token and then calling the isWhitespace(String) method to validate the character data."
+        }
+    }
+}

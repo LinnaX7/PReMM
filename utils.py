@@ -68,6 +68,9 @@ Total_Completion_Token = 0
 
 test_cases_codes_map = {}
 repair_agent = None
+IS_PERFECT_FAULT_LOCALIZATION = True
+MAX_FAULT_TOP = 3
+CUR_FAULT_METHOD = 1
 
 
 def get_version_name():
@@ -249,6 +252,7 @@ def modify_file_pre(working_dir: str, code_info):
     with open(os.path.join(working_dir,  code_info["file_path"]), "w") as repaired_file:
         repaired_file.write(new_content)
 
+
 def merge_related_functions(methods_tests_map: dict):
     merged_methods = []
     merged_methods_tests_map = {}
@@ -310,8 +314,6 @@ def get_all_similar_methods(fault_codes: dict):
     return similar_codes_list
 
 
-
-
 def output_test_cases_codes_map(dataset, bug_id):
     dir_path = os.path.join(ANALYSIS_DIR, dataset, bug_id)
     if not os.path.exists(dir_path):
@@ -329,9 +331,7 @@ def load_test_cases_codes_map(dataset, bug_id):
         return {}
 
 
-def output_prepare_info(dataset, bug_id, signature_method_map, methods_tests_map,
-                        method_test_path_map):
-    dir_path = os.path.join(ANALYSIS_DIR, dataset, bug_id)
+def output_prepare_info(signature_method_map, methods_tests_map, method_test_path_map, dir_path):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
     # with open(os.path.join(dir_path, 'initial_failing_tests.pickle'), 'wb') as file:
@@ -344,8 +344,7 @@ def output_prepare_info(dataset, bug_id, signature_method_map, methods_tests_map
         pickle.dump(method_test_path_map, file)
 
 
-def load_signature_method_map(dataset, bug_id):
-    dir_path = os.path.join(ANALYSIS_DIR, dataset, bug_id)
+def load_signature_method_map(dir_path):
     if os.path.exists(os.path.join(dir_path, 'signature_method_map.pickle')):
         with open(os.path.join(dir_path, 'signature_method_map.pickle'), 'rb') as file:
             return pickle.load(file)
@@ -357,8 +356,7 @@ def get_time():
     return time.time()
 
 
-def load_method_test_path_map(dataset, bug_id):
-    dir_path = os.path.join(ANALYSIS_DIR, dataset, bug_id)
+def load_method_test_path_map(dir_path):
     if os.path.exists(os.path.join(dir_path, 'method_test_path_map.pickle')):
         with open(os.path.join(dir_path, 'method_test_path_map.pickle'), 'rb') as file:
             return pickle.load(file)
@@ -366,10 +364,7 @@ def load_method_test_path_map(dataset, bug_id):
         return {}
 
 
-def load_prepare_info(dataset, bug_id):
-    dir_path = os.path.join(ANALYSIS_DIR, dataset, bug_id)
-    # with open(os.path.join(dir_path, 'initial_failing_tests.pickle'), 'rb') as file:
-    #     failed_tests = pickle.load(file)
+def load_prepare_info(dir_path):
     with open(os.path.join(dir_path, 'signature_method_map.pickle'), 'rb') as file:
         signature_method_map = pickle.load(file)
     with open(os.path.join(dir_path, 'methods_tests_map.pickle'), 'rb') as file:

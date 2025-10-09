@@ -1,0 +1,41 @@
+{
+    "buggy_classes": [
+        "org.jsoup.nodes.TextNode"
+    ],
+    "buggy_methods": [
+        {
+            "method_name": "org.jsoup.nodes.TextNode::getWholeText()",
+            "method_code": "```java\n    public String getWholeText() {\n        return coreValue();\n    }\n\n```",
+            "method_doc": " Get the (unencoded) text of this text node, including any newlines and spaces present in the original. @return text ",
+            "class_name": "org.jsoup.nodes.TextNode",
+            "class_doc": " A text node. ",
+            "test_failure_causes": "Looking at the failed test `testKeepsPreTextAtDepth`, I can identify the key pattern and recommend a possible defect in the production code:\n\n## Analysis of Test Failure Pattern\n\n**Common Pattern Identified:**\n- The test is specifically about preserving whitespace and formatting within `<pre>` elements\n- The failure occurs when extracting text content via `doc.text()` from nested `<pre>` and `<code>` elements\n- Expected: `\"code\\n\\ncode\"` (with two newlines preserved)\n- Actual: `\"code code\"` (newlines converted to single spaces)\n\n**Key Similarity:**\n- The issue revolves around whitespace handling in formatted text elements (`<pre>`, `<code>`)\n- The HTML structure is preserved correctly (second assertion passes), but text extraction is incorrect\n- The failure specifically affects how newlines and whitespace are processed in text content\n\n## Recommended Possible Defect in Production Code\n\nThe likely defect is in **Jsoup's text extraction logic for whitespace handling in `<pre>` and `<code>` elements**.\n\n**Specific Location:** The bug is probably in the `Element.text()` method implementation or in the underlying text node processing logic that handles whitespace normalization.\n\n**Root Cause:** The production code is likely applying generic whitespace normalization rules (collapsing multiple whitespace characters into single spaces) to content within `<pre>` and `<code>` elements, when it should preserve the original whitespace formatting as specified by HTML standards.\n\n**Expected Behavior:** According to HTML specifications, content within `<pre>` elements should preserve whitespace, including newlines and multiple spaces, exactly as written.\n\n**Affected Code Areas:**\n1. `Element.text()` method implementation\n2. Text node processing and whitespace normalization logic\n3. Element-specific text extraction rules (particularly for `<pre>` and `<code>` elements)\n\nThe fix should ensure that when extracting text from elements that are descendants of `<pre>` elements, whitespace preservation rules are properly applied throughout the element hierarchy.",
+            "test_suite": "org.jsoup.nodes.ElementTest",
+            "score": 8,
+            "reason": "#8# The getWholeText() method is highly suspicious because it directly returns the core value without any whitespace preservation logic, and the test failure shows that newlines within pre/code elements are being collapsed into spaces instead of being preserved as required by HTML standards for preformatted text elements."
+        },
+        {
+            "method_name": "org.jsoup.nodes.TextNode::TextNode(String)",
+            "method_code": "```java\n    public TextNode(String text) {\n        value = text;\n    }\n\n```",
+            "method_doc": " Create a new TextNode representing the supplied (unencoded) text).  @param text raw text @see #createFromEncoded(String) ",
+            "class_name": "org.jsoup.nodes.TextNode",
+            "class_doc": " A text node. ",
+            "test_failure_causes": "Looking at the failed test `testKeepsPreTextAtDepth`, I can identify the key pattern and recommend a possible defect in the production code:\n\n## Analysis of Test Failure Pattern\n\n**Common Pattern Identified:**\n- The test is specifically about preserving whitespace and formatting within `<pre>` elements\n- The failure occurs when extracting text content via `doc.text()` from nested `<pre>` and `<code>` elements\n- Expected: `\"code\\n\\ncode\"` (with two newlines preserved)\n- Actual: `\"code code\"` (newlines converted to single spaces)\n\n**Key Similarity:**\n- The issue revolves around whitespace handling in formatted text elements (`<pre>`, `<code>`)\n- The HTML structure is preserved correctly (second assertion passes), but text extraction is incorrect\n- The failure specifically affects how newlines and whitespace are processed in text content\n\n## Recommended Possible Defect in Production Code\n\nThe likely defect is in **Jsoup's text extraction logic for whitespace handling in `<pre>` and `<code>` elements**.\n\n**Specific Location:** The bug is probably in the `Element.text()` method implementation or in the underlying text node processing logic that handles whitespace normalization.\n\n**Root Cause:** The production code is likely applying generic whitespace normalization rules (collapsing multiple whitespace characters into single spaces) to content within `<pre>` and `<code>` elements, when it should preserve the original whitespace formatting as specified by HTML standards.\n\n**Expected Behavior:** According to HTML specifications, content within `<pre>` elements should preserve whitespace, including newlines and multiple spaces, exactly as written.\n\n**Affected Code Areas:**\n1. `Element.text()` method implementation\n2. Text node processing and whitespace normalization logic\n3. Element-specific text extraction rules (particularly for `<pre>` and `<code>` elements)\n\nThe fix should ensure that when extracting text from elements that are descendants of `<pre>` elements, whitespace preservation rules are properly applied throughout the element hierarchy.",
+            "test_suite": "org.jsoup.nodes.ElementTest",
+            "score": 2,
+            "reason": "#2# The TextNode constructor simply stores the text value and doesn't contain any whitespace processing logic. The actual whitespace handling likely occurs in text extraction methods like Element.text() or TextNode.getWholeText() where normalization decisions are made."
+        }
+    ],
+    "buggy_codes": {
+        "org.jsoup.nodes.TextNode::TextNode(String)": {
+            "method_name": "org.jsoup.nodes.TextNode::TextNode(String)",
+            "method_code": "```java\n    public TextNode(String text) {\n        value = text;\n    }\n\n```",
+            "method_doc": " Create a new TextNode representing the supplied (unencoded) text).  @param text raw text @see #createFromEncoded(String) "
+        },
+        "org.jsoup.nodes.TextNode::getWholeText()": {
+            "method_name": "org.jsoup.nodes.TextNode::getWholeText()",
+            "method_code": "```java\n    public String getWholeText() {\n        return coreValue();\n    }\n\n```",
+            "method_doc": " Get the (unencoded) text of this text node, including any newlines and spaces present in the original. @return text "
+        }
+    }
+}

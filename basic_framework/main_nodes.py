@@ -1,29 +1,45 @@
 import os.path
 from basic_framework.agent_state import MAgentState, RepairStateEnum, AgentState, RepairState
-from basic_framework.program_analysis import program_analysis_repository, key_token_mining, related_analysis
+from basic_framework.program_analysis import program_analysis_repository_with_pfl, key_token_mining, related_analysis, \
+    program_analysis_repository_without_pfl
 import utils
 
 
 def preprocessor(m_state: MAgentState):
     m_state['failed_test_cases'] = m_state.get('bug_benchmark').get_init_failing_tests()
-    if not os.path.exists(os.path.join(utils.ANALYSIS_DIR, m_state.get('database_name'), m_state.get('bug_id'))):
-        utils.Repair_Process_Logger.log(f"Begin Analyze {m_state.get('bug_id')}")
+    if utils.IS_PERFECT_FAULT_LOCALIZATION:
+        analysis_output = os.path.join(utils.ANALYSIS_DIR, m_state.get('database_name'), m_state.get('bug_id'),
+                                       "perfect")
+    else:
+        analysis_output = os.path.join(utils.ANALYSIS_DIR,
+                                       m_state.get('database_name'),
+                                       m_state.get('bug_id'), f"Top-{utils.CUR_FAULT_METHOD}")
+    if not os.path.exists(analysis_output):
+        utils.Repair_Process_Logger.log(f"Begin Program Analyzing {m_state.get('bug_id')}")
         start_time = utils.get_time()
-        signature_method_map, methods_tests_map, method_test_path_map = program_analysis_repository(
-            m_state.get('bug_benchmark').get_work_dir(),
-            m_state.get('bug_benchmark').get_source_dir(),
-            m_state.get('bug_benchmark').get_build_dir(),
-            m_state.get('bug_benchmark').get_test_build_dir(),
-            list(m_state.get('failed_test_cases').keys()),
-            m_state.get('bug_benchmark').get_fault_location_file())
-        utils.output_prepare_info(m_state.get('database_name'), m_state.get('bug_id'),
-                                  signature_method_map, methods_tests_map, method_test_path_map)
+        if utils.IS_PERFECT_FAULT_LOCALIZATION:
+            signature_method_map, methods_tests_map, method_test_path_map = program_analysis_repository_with_pfl(
+                m_state.get('bug_benchmark').get_work_dir(),
+                m_state.get('bug_benchmark').get_source_dir(),
+                m_state.get('bug_benchmark').get_build_dir(),
+                m_state.get('bug_benchmark').get_test_build_dir(),
+                list(m_state.get('failed_test_cases').keys()),
+                m_state.get('bug_benchmark').get_fault_location_file())
+        else:
+            signature_method_map, methods_tests_map, method_test_path_map = program_analysis_repository_without_pfl(
+                m_state.get('bug_benchmark').get_work_dir(),
+                m_state.get('bug_benchmark').get_source_dir(),
+                m_state.get('bug_benchmark').get_build_dir(),
+                m_state.get('bug_benchmark').get_test_build_dir(),
+                list(m_state.get('failed_test_cases').keys()),
+                m_state.get('bug_benchmark').get_suspicious_method(utils.CUR_FAULT_METHOD - 1)
+            )
+        utils.output_prepare_info(signature_method_map, methods_tests_map, method_test_path_map, analysis_output)
         utils.Repair_Process_Logger.log(f"End Analyze {m_state.get('bug_id')}")
         end_time = utils.get_time()
         utils.Repair_Process_Logger.log(f"Program Analysis Time: {end_time - start_time} s.")
     else:
-        signature_method_map, methods_tests_map, method_test_path_map = utils.load_prepare_info(
-            m_state.get('database_name'), m_state.get('bug_id'))
+        signature_method_map, methods_tests_map, method_test_path_map = utils.load_prepare_info(analysis_output)
     m_state['fault_codes_list'], m_state['fault_files'] = utils.codes_format_transform(
         list(signature_method_map.values()))
     if utils.Enable_FMC:
@@ -127,12 +143,13 @@ def init_repair_agent(m_state: MAgentState, signature_method_map, method_test_pa
                                                repair_exception="", prompt_tokens=0, completion_tokens=0),
                    'key_tokens': {}}
     for fault_file in agent_state.get('fault_files'):
-        agent_state['key_tokens'][fault_file] = key_token_mining(agent_state.get('bug_benchmark').get_work_dir(), fault_file)
+        agent_state['key_tokens'][fault_file] = key_token_mining(agent_state.get('bug_benchmark').get_work_dir(),
+                                                                 fault_file)
     agent_state['relative_suspicious_paths'] = get_invocation_chain_paths(agent_state.get('fault_codes'),
                                                                           method_test_path_map)
     agent_state['failed_test_cases'] = list(m_state.get('failed_test_cases').values())
     print(m_state.get('failed_test_cases'))
-    print(agent_state['failed_test_cases'] )
+    print(agent_state['failed_test_cases'])
     m_state['agent_states'].append(agent_state)
     m_state['merged_agents'] = {tuple(m_state.get('failed_test_cases').keys()): [agent_state]}
 
@@ -235,9 +252,11 @@ def continue_to_overall_compile(m_state: MAgentState):
 
 def test_analysis(test_result, a_state: AgentState, repair_success):
     failing_test_methods = list(test_result.keys())
-    related_tests = related_analysis(a_state.get('bug_benchmark').get_work_dir(), a_state.get('bug_benchmark').get_source_dir(),
+    related_tests = related_analysis(a_state.get('bug_benchmark').get_work_dir(),
+                                     a_state.get('bug_benchmark').get_source_dir(),
                                      a_state.get('bug_benchmark').get_build_dir(), failing_test_methods,
-                                     a_state.get('bug_benchmark').get_test_build_dir(), list(a_state.get('fault_codes').keys()))
+                                     a_state.get('bug_benchmark').get_test_build_dir(),
+                                     list(a_state.get('fault_codes').keys()))
     if len(related_tests) == 0:
         a_state['repair_state']['repair_result'] = repair_success
         a_state['failed_test_cases'] = []

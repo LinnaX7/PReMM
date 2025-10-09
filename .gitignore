@@ -1,6 +1,7 @@
 Config/defects4j_environment.json
 Config/gitbug_java_environment.json
 Config/llm_config.json
+Config/
 stderr.txt
 output
 tmp

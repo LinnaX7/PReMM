@@ -1,0 +1,25 @@
+{
+    "buggy_classes": [
+        "org.jsoup.parser.HtmlTreeBuilderState"
+    ],
+    "buggy_methods": [
+        {
+            "method_name": "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)",
+            "method_code": "```java\n    private static boolean isWhitespace(Token t) {\n        if (t.isCharacter()) {\n            String data = t.asCharacter().getData();\n            return isWhitespace(data);\n        }\n        return false;\n    }\n\n```",
+            "method_doc": "This method checks if a token represents whitespace characters by verifying if it's a character token and then calling the isWhitespace(String) method to validate the character data.",
+            "class_name": "org.jsoup.parser.HtmlTreeBuilderState",
+            "class_doc": "",
+            "test_failure_causes": "Based on my analysis of the failed test and its behavior, I'll identify the common pattern and recommend possible defects in the production code.\n\n**Step 1: Identify Common Patterns and Similarities**\n\nFrom the single failed test `dropsSlashFromAttributeName`, I can observe:\n\n1. **Core Issue**: The test is failing because the HTML parser is not correctly handling attribute names that begin with a slash character (`/`) in self-closing tags.\n\n2. **Specific Failure**: The assertion `doc.select(\"img[onerror]\").size() != 0` is failing, indicating that the parser is not creating an element with the `onerror` attribute when given `/onerror` in the source HTML.\n\n3. **Expected Behavior**: The parser should:\n   - Drop the leading slash from attribute names like `/onerror` \u2192 `onerror`\n   - Parse the attribute value correctly\n   - Handle self-closing tag syntax appropriately\n\n4. **Parser Context**: The failure occurs with the default HTML parser, while the XML parser part of the test might be working correctly (not failing based on the test structure).\n\n**Step 2: Recommend Possible Defects in Production Code**\n\nBased on the test failure pattern, the likely defects are in the HTML parsing logic, specifically in the `org.jsoup.parser` package:\n\n1. **Attribute Name Processing Defect**: The tokenization or attribute parsing logic is not properly handling attribute names that start with a slash character. The production code likely fails to strip the leading `/` from attribute names during parsing.\n\n2. **Self-Closing Tag Attribute Parsing Defect**: There may be a bug in how attributes are extracted from self-closing tags when the attribute name begins with special characters. The parser might be treating `/onerror` as part of the tag structure rather than as an attribute name.\n\n3. **Tokenization State Machine Defect**: The state machine in the HTML tokenizer might have incorrect transitions when encountering a slash character immediately after the tag name in a self-closing tag context, causing it to miss or misinterpret subsequent attributes.\n\n4. **Attribute Normalization Defect**: The code responsible for normalizing attribute names might have a condition that doesn't account for leading slashes, or it might be removing the slash but not properly adding the normalized attribute to the element.\n\nThe defect is most likely in the attribute parsing logic within the HTML parser's tokenization process, where the leading slash in attribute names is not being properly handled and removed during the parsing of self-closing tags.",
+            "test_suite": "org.jsoup.parser.AttributeParseTest",
+            "score": 2,
+            "reason": "#2# The isWhitespace method only checks if tokens represent whitespace characters, which is unrelated to the core issue of parsing attribute names that start with slashes in self-closing tags. The test failure involves attribute name normalization and self-closing tag parsing logic, not whitespace detection."
+        }
+    ],
+    "buggy_codes": {
+        "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)": {
+            "method_name": "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)",
+            "method_code": "```java\n    private static boolean isWhitespace(Token t) {\n        if (t.isCharacter()) {\n            String data = t.asCharacter().getData();\n            return isWhitespace(data);\n        }\n        return false;\n    }\n\n```",
+            "method_doc": "This method checks if a token represents whitespace characters by verifying if it's a character token and then calling the isWhitespace(String) method to validate the character data."
+        }
+    }
+}

@@ -1,0 +1,57 @@
+{
+    "buggy_classes": [
+        "org.jsoup.parser.Tag"
+    ],
+    "buggy_methods": [
+        {
+            "method_name": "org.jsoup.parser.Tag::valueOf(String)",
+            "method_code": "```java\n    public static Tag valueOf(String tagName) {\n        Validate.notNull(tagName);\n        Tag tag = tags.get(tagName);\n\n        if (tag == null) {\n            tagName = tagName.trim().toLowerCase();\n            Validate.notEmpty(tagName);\n            tag = tags.get(tagName);\n\n            if (tag == null) {\n                // not defined: create default; go anywhere, do anything! (incl be inside a <p>)\n                tag = new Tag(tagName);\n                tag.isBlock = false;\n                tag.canContainBlock = true;\n            }\n        }\n        return tag;\n    }\n\n```",
+            "method_doc": " Get a Tag by name. If not previously defined (unknown), returns a new generic tag, that can do anything. <p/> Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals().  @param tagName Name of tag, e.g. \"p\". Case insensitive. @return The tag, either defined or new generic. ",
+            "class_name": "org.jsoup.parser.Tag",
+            "class_doc": " HTML Tag capabilities.  ",
+            "test_failure_causes": "Let\u2019s break this down step by step.  \n\n---\n\n**1. Understanding the test behavior**  \n\nThe test `convertsImageToImg` expects:  \n\n- `<image>` in **normal HTML** \u2192 converted to `<img />`  \n- `<image>` inside `<svg>` \u2192 preserved as `<image />`  \n\nThe actual output shows:  \n\n```\n<img />\n<svg>\n <img />\n</svg>\n```\n\nBut expected was:  \n\n```\n<img />\n<svg>\n <image />\n</svg>\n```\n\nSo the problem is: the `<image>` inside `<svg>` is incorrectly being changed to `<img>`.\n\n---\n\n**2. Root cause analysis**  \n\nThe parser must distinguish between **HTML namespace** and **SVG namespace** when processing `<image>`.  \n\nIn HTML, `<image>` is not a valid tag and browsers treat it as `<img>`.  \nIn SVG namespace, `<image>` is a valid element and must be preserved.  \n\nThe test failure suggests the parser is **not respecting the SVG context** \u2014 it\u2019s applying the HTML rule (`image` \u2192 `img`) even inside `<svg>`.\n\n---\n\n**3. Common pattern**  \n\nOnly one test is failing here, but the pattern is:  \n- **Namespace-aware parsing issue**  \n- The HTML parser is likely using a single set of tag name mappings for the entire document, ignoring the SVG subtree.\n\n---\n\n**4. Possible defect in production code**  \n\nThe bug is likely in the **tag conversion logic** inside the parser.  \n\nSomewhere in the code, there\u2019s probably a rule like:  \n`if (tagName.equals(\"image\")) then change to \"img\"`  \n\nBut this rule is being applied **without checking if the current parsing context is inside an `<svg>` element** (where SVG namespace rules apply).\n\n---\n\n**Recommendation for defect location:**  \n\nLook in the parser\u2019s **`HtmlTreeBuilder`** or **`Tag`** processing logic for the special case handling of `<image>`.  \nThe fix would be to **skip the conversion when inside an SVG namespace**.  \n\nThe production code defect is: **Missing namespace check when converting `<image>` to `<img>`**.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 8,
+            "reason": "#8# This method is very likely to be the best location that need to be fixed, because it handles tag name resolution and contains the logic that maps \"image\" to \"img\" tag. The test failure shows that SVG namespace context is not being respected when converting image tags, and this method appears to be where tag name normalization and mapping occurs without considering the current parsing context or namespace."
+        },
+        {
+            "method_name": "org.jsoup.parser.Tag::isSelfClosing()",
+            "method_code": "```java\n    public boolean isSelfClosing() {\n        return empty || selfClosing;\n    }\n\n```",
+            "method_doc": " Get if this tag is self closing.  @return if this tag should be output as self closing. ",
+            "class_name": "org.jsoup.parser.Tag",
+            "class_doc": " HTML Tag capabilities.  ",
+            "test_failure_causes": "Let\u2019s break this down step by step.  \n\n---\n\n**1. Understanding the test behavior**  \n\nThe test `convertsImageToImg` expects:  \n\n- `<image>` in **normal HTML** \u2192 converted to `<img />`  \n- `<image>` inside `<svg>` \u2192 preserved as `<image />`  \n\nThe actual output shows:  \n\n```\n<img />\n<svg>\n <img />\n</svg>\n```\n\nBut expected was:  \n\n```\n<img />\n<svg>\n <image />\n</svg>\n```\n\nSo the problem is: the `<image>` inside `<svg>` is incorrectly being changed to `<img>`.\n\n---\n\n**2. Root cause analysis**  \n\nThe parser must distinguish between **HTML namespace** and **SVG namespace** when processing `<image>`.  \n\nIn HTML, `<image>` is not a valid tag and browsers treat it as `<img>`.  \nIn SVG namespace, `<image>` is a valid element and must be preserved.  \n\nThe test failure suggests the parser is **not respecting the SVG context** \u2014 it\u2019s applying the HTML rule (`image` \u2192 `img`) even inside `<svg>`.\n\n---\n\n**3. Common pattern**  \n\nOnly one test is failing here, but the pattern is:  \n- **Namespace-aware parsing issue**  \n- The HTML parser is likely using a single set of tag name mappings for the entire document, ignoring the SVG subtree.\n\n---\n\n**4. Possible defect in production code**  \n\nThe bug is likely in the **tag conversion logic** inside the parser.  \n\nSomewhere in the code, there\u2019s probably a rule like:  \n`if (tagName.equals(\"image\")) then change to \"img\"`  \n\nBut this rule is being applied **without checking if the current parsing context is inside an `<svg>` element** (where SVG namespace rules apply).\n\n---\n\n**Recommendation for defect location:**  \n\nLook in the parser\u2019s **`HtmlTreeBuilder`** or **`Tag`** processing logic for the special case handling of `<image>`.  \nThe fix would be to **skip the conversion when inside an SVG namespace**.  \n\nThe production code defect is: **Missing namespace check when converting `<image>` to `<img>`**.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 3,
+            "reason": "#3# The isSelfClosing() method only determines if a tag should be self-closing based on empty/selfClosing flags, but the test failure is about namespace-aware tag name conversion (image\u2192img) in SVG context, which is unrelated to self-closing behavior. The actual bug likely resides in tag name mapping logic elsewhere in the parser."
+        },
+        {
+            "method_name": "org.jsoup.parser.Tag::isKnownTag()",
+            "method_code": "```java\n    public boolean isKnownTag() {\n        return tags.containsKey(tagName);\n    }\n\n```",
+            "method_doc": " Get if this is a pre-defined tag, or was auto created on parsing.  @return if a known tag ",
+            "class_name": "org.jsoup.parser.Tag",
+            "class_doc": " HTML Tag capabilities.  ",
+            "test_failure_causes": "Let\u2019s break this down step by step.  \n\n---\n\n**1. Understanding the test behavior**  \n\nThe test `convertsImageToImg` expects:  \n\n- `<image>` in **normal HTML** \u2192 converted to `<img />`  \n- `<image>` inside `<svg>` \u2192 preserved as `<image />`  \n\nThe actual output shows:  \n\n```\n<img />\n<svg>\n <img />\n</svg>\n```\n\nBut expected was:  \n\n```\n<img />\n<svg>\n <image />\n</svg>\n```\n\nSo the problem is: the `<image>` inside `<svg>` is incorrectly being changed to `<img>`.\n\n---\n\n**2. Root cause analysis**  \n\nThe parser must distinguish between **HTML namespace** and **SVG namespace** when processing `<image>`.  \n\nIn HTML, `<image>` is not a valid tag and browsers treat it as `<img>`.  \nIn SVG namespace, `<image>` is a valid element and must be preserved.  \n\nThe test failure suggests the parser is **not respecting the SVG context** \u2014 it\u2019s applying the HTML rule (`image` \u2192 `img`) even inside `<svg>`.\n\n---\n\n**3. Common pattern**  \n\nOnly one test is failing here, but the pattern is:  \n- **Namespace-aware parsing issue**  \n- The HTML parser is likely using a single set of tag name mappings for the entire document, ignoring the SVG subtree.\n\n---\n\n**4. Possible defect in production code**  \n\nThe bug is likely in the **tag conversion logic** inside the parser.  \n\nSomewhere in the code, there\u2019s probably a rule like:  \n`if (tagName.equals(\"image\")) then change to \"img\"`  \n\nBut this rule is being applied **without checking if the current parsing context is inside an `<svg>` element** (where SVG namespace rules apply).\n\n---\n\n**Recommendation for defect location:**  \n\nLook in the parser\u2019s **`HtmlTreeBuilder`** or **`Tag`** processing logic for the special case handling of `<image>`.  \nThe fix would be to **skip the conversion when inside an SVG namespace**.  \n\nThe production code defect is: **Missing namespace check when converting `<image>` to `<img>`**.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 3,
+            "reason": "#3# The isKnownTag() method only checks if a tag name exists in a predefined tag registry, but the core issue is namespace-aware parsing where <image> should be preserved in SVG context but converted to <img> in HTML context. The actual bug likely resides in tag conversion logic elsewhere that doesn't check namespace context before applying transformations."
+        }
+    ],
+    "buggy_codes": {
+        "org.jsoup.parser.Tag::valueOf(String)": {
+            "method_name": "org.jsoup.parser.Tag::valueOf(String)",
+            "method_code": "```java\n    public static Tag valueOf(String tagName) {\n        Validate.notNull(tagName);\n        Tag tag = tags.get(tagName);\n\n        if (tag == null) {\n            tagName = tagName.trim().toLowerCase();\n            Validate.notEmpty(tagName);\n            tag = tags.get(tagName);\n\n            if (tag == null) {\n                // not defined: create default; go anywhere, do anything! (incl be inside a <p>)\n                tag = new Tag(tagName);\n                tag.isBlock = false;\n                tag.canContainBlock = true;\n            }\n        }\n        return tag;\n    }\n\n```",
+            "method_doc": " Get a Tag by name. If not previously defined (unknown), returns a new generic tag, that can do anything. <p/> Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals().  @param tagName Name of tag, e.g. \"p\". Case insensitive. @return The tag, either defined or new generic. "
+        },
+        "org.jsoup.parser.Tag::isSelfClosing()": {
+            "method_name": "org.jsoup.parser.Tag::isSelfClosing()",
+            "method_code": "```java\n    public boolean isSelfClosing() {\n        return empty || selfClosing;\n    }\n\n```",
+            "method_doc": " Get if this tag is self closing.  @return if this tag should be output as self closing. "
+        },
+        "org.jsoup.parser.Tag::isKnownTag()": {
+            "method_name": "org.jsoup.parser.Tag::isKnownTag()",
+            "method_code": "```java\n    public boolean isKnownTag() {\n        return tags.containsKey(tagName);\n    }\n\n```",
+            "method_doc": " Get if this is a pre-defined tag, or was auto created on parsing.  @return if a known tag "
+        }
+    }
+}

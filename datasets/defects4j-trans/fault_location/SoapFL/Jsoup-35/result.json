@@ -1,0 +1,25 @@
+{
+    "buggy_classes": [
+        "org.jsoup.parser.HtmlTreeBuilderState"
+    ],
+    "buggy_methods": [
+        {
+            "method_name": "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)",
+            "method_code": "```java\n    private static boolean isWhitespace(Token t) {\n        if (t.isCharacter()) {\n            String data = t.asCharacter().getData();\n            // todo: this checks more than spec - \"\\t\", \"\\n\", \"\\f\", \"\\r\", \" \"\n            for (int i = 0; i < data.length(); i++) {\n                char c = data.charAt(i);\n                if (!StringUtil.isWhitespace(c))\n                    return false;\n            }\n            return true;\n        }\n        return false;\n    }\n\n```",
+            "method_doc": "Checks if a token contains only whitespace characters by examining each character in character tokens. This method calls method \"StringUtil::isWhitespace(char)\" to verify individual characters.",
+            "class_name": "org.jsoup.parser.HtmlTreeBuilderState",
+            "class_doc": "",
+            "test_failure_causes": "Based on my analysis of the failed test case, I can identify the key pattern and recommend a possible defect in the production code:\n\n**Common Pattern Analysis:**\nThe test `handlesUnclosedAnchors` is failing due to incorrect handling of unclosed anchor tags in HTML parsing. The test input contains an unclosed `<a>` tag followed by a `<p>` tag, and the parser should automatically close the first anchor before the paragraph starts, then correctly associate the closing `</a>` with a new anchor within the paragraph.\n\n**Test Output Analysis:**\nThe actual output shows:\n- Expected: `<a href=\"http://example.com/\">Link</a>\\n<p><a href=\"http://example.com/\">Error link</a></p>`\n- Actual: `<a href=\"http://example.com/\">Link</a>\\n<p><a>Error link</a></p>`\n\nThe key difference is that in the actual output, the second anchor tag within the paragraph is missing the `href` attribute that should have been carried over from the original unclosed anchor.\n\n**Recommended Possible Defect in Production Code:**\n\nThe defect likely exists in the HTML parser's tag reconstruction logic when handling unclosed inline elements (specifically anchor tags) that are followed by block-level elements (like paragraphs). \n\nThe parser appears to be correctly closing the first anchor tag before the paragraph, but when it encounters the closing `</a>` tag within the paragraph, it's creating a new anchor element without properly inheriting the attributes from the original unclosed anchor.\n\n**Specific areas to investigate in the production code:**\n1. The HTML tree builder's handling of unclosed inline elements when transitioning to block context\n2. The attribute inheritance mechanism when reconstructing implicitly closed elements\n3. The state management of active formatting elements during parsing\n4. The logic for handling \"adoption agency\" algorithm for inline elements like anchors\n\nThe parser should maintain the formatting element's attributes when automatically closing and reopening anchor tags in different contexts, but it's currently failing to preserve the `href` attribute in the reconstructed anchor within the paragraph element.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 2,
+            "reason": "#2# The isWhitespace method is unlikely to be the root cause of the test failure. The test failure involves incorrect handling of unclosed anchor tags and attribute inheritance when parsing HTML structure, while the isWhitespace method only checks if token data contains whitespace characters. The core issue appears to be in the HTML tree builder's tag reconstruction logic and attribute management, not in whitespace detection."
+        }
+    ],
+    "buggy_codes": {
+        "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)": {
+            "method_name": "org.jsoup.parser.HtmlTreeBuilderState::isWhitespace(Token)",
+            "method_code": "```java\n    private static boolean isWhitespace(Token t) {\n        if (t.isCharacter()) {\n            String data = t.asCharacter().getData();\n            // todo: this checks more than spec - \"\\t\", \"\\n\", \"\\f\", \"\\r\", \" \"\n            for (int i = 0; i < data.length(); i++) {\n                char c = data.charAt(i);\n                if (!StringUtil.isWhitespace(c))\n                    return false;\n            }\n            return true;\n        }\n        return false;\n    }\n\n```",
+            "method_doc": "Checks if a token contains only whitespace characters by examining each character in character tokens. This method calls method \"StringUtil::isWhitespace(char)\" to verify individual characters."
+        }
+    }
+}

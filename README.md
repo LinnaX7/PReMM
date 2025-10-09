@@ -170,7 +170,13 @@ conda activate premm_env
 We provide a `poetry` configuration file (`pyproject.toml`) for PReMM to install dependencies.
 
 ```shell
-pip install poetry
+poetry run python run.py
+  --dataset defects4j-trans \
+  --bug_id Csv-3 \
+  -c \
+  -d \
+  --chain_length 5 \
+  -wopfl 
 ```
 
 1. Configure Poetry to use the current Python environment:

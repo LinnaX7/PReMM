@@ -29,34 +29,53 @@ def run_repair_single_bug(max_tries, version_name, dataset, bug_id, benchmark):
     utils.Repair_Process_Logger = Logger(
         utils.OUTPUT_DIR + os.sep + bug_id + os.sep + f"{bug_id}-{utils.MAX_ITERATIONS}.log")
     try:
+        print(f"Checking out {bug_id}")
         benchmark.checkout(bug_id)
     except Exception as e:
         print(str(e))
         return
-    while (not utils.Repair_Result) and repair_count < max_tries:
-        main_agent.invoke({'bug_id': bug_id, "database_name": dataset,
-                           'failed_test_cases': benchmark.get_init_failing_tests(),
-                           'bug_benchmark': benchmark}, {"recursion_limit": 100})
-        repair_count += 1
-    rows = ["Bug_id", "Repair_Result", "Repair_Attempt_Count", "Repair_Iterative_Count",
-            "Last_Input_Prompt_Tokens", "Last_Completion_Tokens", "Total_Input_Prompt_Tokens",
-            "Total_Completion_Tokens"]  # time.sleep(20)
-    row = [f"{bug_id}", utils.Repair_Result, repair_count, utils.Repair_Iterative_Count, utils.Prompt_Tokens,
-           utils.Completion_Tokens, utils.Total_Prompt_Token, utils.Total_Completion_Token]
-    with open(repair_result_file, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        writer.writerow(rows)
-        writer.writerow(row)
+
+    while utils.IS_PERFECT_FAULT_LOCALIZATION or utils.CUR_FAULT_METHOD <= min(utils.MAX_FAULT_TOP, len(cur_benchmark.get_suspicious_methods())):
+        if not utils.IS_PERFECT_FAULT_LOCALIZATION:
+            print(f"Trying to use the top-{utils.CUR_FAULT_METHOD} suspicious method to repair the program....")
+            utils.Repair_Process_Logger.log(f"Trying to use the top-{utils.CUR_FAULT_METHOD} suspicious method to repair the program....")
+        else:
+            print(f"Trying to use the perfect fault localization to repair the program....")
+            utils.Repair_Process_Logger.log(
+                f"Trying to use the the perfect fault localization to repair the program....")
+        while (not utils.Repair_Result) and repair_count < max_tries:
+            main_agent.invoke({'bug_id': bug_id, "database_name": dataset,
+                               'failed_test_cases': benchmark.get_init_failing_tests(),
+                               'bug_benchmark': benchmark}, {"recursion_limit": 100})
+            repair_count += 1
+
+        rows = ["Bug_id", "Repair_Result", "Repair_Attempt_Count", "Repair_Iterative_Count",
+                "Last_Input_Prompt_Tokens", "Last_Completion_Tokens", "Total_Input_Prompt_Tokens",
+                "Total_Completion_Tokens"]  # time.sleep(20)
+        row = [f"{bug_id}", utils.Repair_Result, repair_count, utils.Repair_Iterative_Count, utils.Prompt_Tokens,
+               utils.Completion_Tokens, utils.Total_Prompt_Token, utils.Total_Completion_Token]
+
+        with open(repair_result_file, mode='a+', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            if utils.CUR_FAULT_METHOD == 1:
+                writer.writerow(rows)
+            writer.writerow(row)
+        repair_count = 0
+        utils.Repair_Iterative_Count = 0
+        utils.Prompt_Tokens = 0
+        utils.Completion_Tokens = 0
+        utils.Total_Prompt_Token = 0
+        utils.Total_Completion_Token = 0
+        utils.CUR_FAULT_METHOD += 1
+        if utils.Repair_Result or utils.IS_PERFECT_FAULT_LOCALIZATION:
+            break
+
     end_time = time.time()
     utils.Repair_Process_Logger.log(f"Total Time: {end_time - start_time} s.")
     utils.remove_temp_dir(benchmark.get_work_dir())
     utils.output_test_cases_codes_map(dataset, bug_id)
     utils.Repair_Result = False
-    utils.Repair_Iterative_Count = 0
-    utils.Prompt_Tokens = 0
-    utils.Completion_Tokens = 0
-    utils.Total_Prompt_Token = 0
-    utils.Total_Completion_Token = 0
+    utils.CUR_FAULT_METHOD = 1
 
 
 if __name__ == '__main__':
@@ -77,6 +96,9 @@ if __name__ == '__main__':
                         action="store_true", default=False)
     parser.add_argument("-d", "--dual_agent_based_patch_generation",
                         help="flag that dual-agent-based patch generation.",
+                        action="store_true", default=False)
+    parser.add_argument("-wopfl", "--without_perfect_fault_localization",
+                        help="flag that enable perfect fault localization.",
                         action="store_true", default=False)
     # parser.add_argument("-i", "--invocation_prompt", help="flag that enable invocation chain prompt.",
     #                     action="store_true", default=False)
@@ -105,6 +127,7 @@ if __name__ == '__main__':
     utils.Completion_Tokens = 0
     utils.Total_Prompt_Token = 0
     utils.Total_Completion_Token = 0
+    utils.IS_PERFECT_FAULT_LOCALIZATION = not args.without_perfect_fault_localization
     version_name = utils.get_version_name()
 
     cur_benchmark = BenchmarkRegistry.create_benchmark(args.dataset)

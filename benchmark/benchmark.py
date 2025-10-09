@@ -12,6 +12,7 @@ class Benchmark:
         self.test_build_dir = "test_build_dir"
         self.fault_location_file = "fault_location_file"
         self.init_failing_tests = {}
+        self.suspicious_methods = []
 
     def checkout(self, bug_id):
         self.bug_id = bug_id
@@ -70,6 +71,12 @@ class Benchmark:
         self.compile_files(file_list)
 
     def get_all_bugs(self):
+        return []
+
+    def get_suspicious_methods(self):
+        return self.suspicious_methods
+
+    def get_suspicious_method(self, index):
         return []
 
 

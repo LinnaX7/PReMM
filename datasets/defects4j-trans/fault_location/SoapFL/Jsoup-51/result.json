@@ -1,0 +1,41 @@
+{
+    "buggy_classes": [
+        "org.jsoup.parser.Tag"
+    ],
+    "buggy_methods": [
+        {
+            "method_name": "org.jsoup.parser.Tag::valueOf(String)",
+            "method_code": "```java\n    public static Tag valueOf(String tagName) {\n        Validate.notNull(tagName);\n        Tag tag = tags.get(tagName);\n\n        if (tag == null) {\n            tagName = tagName.trim().toLowerCase();\n            Validate.notEmpty(tagName);\n            tag = tags.get(tagName);\n\n            if (tag == null) {\n                // not defined: create default; go anywhere, do anything! (incl be inside a <p>)\n                tag = new Tag(tagName);\n                tag.isBlock = false;\n                tag.canContainBlock = true;\n            }\n        }\n        return tag;\n    }\n\n```",
+            "method_doc": " Get a Tag by name. If not previously defined (unknown), returns a new generic tag, that can do anything. <p> Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals(). </p>  @param tagName Name of tag, e.g. \"p\". Case insensitive. @return The tag, either defined or new generic. ",
+            "class_name": "org.jsoup.parser.Tag",
+            "class_doc": " HTML Tag capabilities.  ",
+            "test_failure_causes": "Let me analyze this test failure step by step.\n\n## Analysis of Test Failure\n\n**Test Purpose**: This test verifies that HTML tags with non-ASCII characters (Japanese characters \"\u9032\u6357\u63a8\u79fb\u30b0\u30e9\u30d5\") are properly parsed and can be selected using CSS selectors.\n\n**Failure Pattern**: \n- The test expects `\"Yes\"` but gets an empty string `\"\"`\n- This indicates that `doc.select(\"\u9032\u6357\u63a8\u79fb\u30b0\u30e9\u30d5\")` returned no elements\n- Therefore, the non-ASCII tag was not properly recognized during parsing\n\n## Common Pattern Identified\n\nThe core issue is that **non-ASCII tag names are not being properly handled** during HTML parsing. The parser appears to either:\n1. Fail to recognize tags with non-ASCII characters as valid tags\n2. Normalize or strip non-ASCII characters from tag names\n3. Create elements with incorrect tag names that don't match the selector\n\n## Recommended Possible Defect in Production Code\n\nBased on the analysis, I recommend investigating the **HTML tokenization and tag name processing logic** in the production code. The likely defect is:\n\n**The HTML parser's tag name validation or normalization logic is incorrectly rejecting or modifying non-ASCII characters in tag names.**\n\nSpecifically, look for:\n- Character encoding validation that only accepts ASCII characters for tag names\n- Tag name normalization functions that strip or replace non-ASCII characters\n- CSS selector matching logic that doesn't handle non-ASCII tag names correctly\n- HTML specification compliance issues regarding Unicode characters in tag names\n\nThe defect likely resides in the core parsing components that handle tag recognition and element creation, rather than in the CSS selector engine itself, since the element doesn't appear to be created properly in the first place.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 9,
+            "reason": "#9# This method is highly suspicious because it normalizes tag names to lowercase using `tagName.trim().toLowerCase()` before looking them up in the tag registry. The test uses Japanese characters \"\u9032\u6357\u63a8\u79fb\u30b0\u30e9\u30d5\" which may not be properly handled by the lowercase conversion, potentially causing the tag lookup to fail and creating a generic tag with incorrect behavior. The method's character encoding handling during case normalization is likely the root cause of non-ASCII tags not being properly recognized."
+        },
+        {
+            "method_name": "org.jsoup.parser.Tag::register(Tag)",
+            "method_code": "```java\n    private static void register(Tag tag) {\n        tags.put(tag.tagName, tag);\n    }\n\n```",
+            "method_doc": "Registers a Tag instance in the tags registry by mapping its tagName to the tag object.",
+            "class_name": "org.jsoup.parser.Tag",
+            "class_doc": " HTML Tag capabilities.  ",
+            "test_failure_causes": "Let me analyze this test failure step by step.\n\n## Analysis of Test Failure\n\n**Test Purpose**: This test verifies that HTML tags with non-ASCII characters (Japanese characters \"\u9032\u6357\u63a8\u79fb\u30b0\u30e9\u30d5\") are properly parsed and can be selected using CSS selectors.\n\n**Failure Pattern**: \n- The test expects `\"Yes\"` but gets an empty string `\"\"`\n- This indicates that `doc.select(\"\u9032\u6357\u63a8\u79fb\u30b0\u30e9\u30d5\")` returned no elements\n- Therefore, the non-ASCII tag was not properly recognized during parsing\n\n## Common Pattern Identified\n\nThe core issue is that **non-ASCII tag names are not being properly handled** during HTML parsing. The parser appears to either:\n1. Fail to recognize tags with non-ASCII characters as valid tags\n2. Normalize or strip non-ASCII characters from tag names\n3. Create elements with incorrect tag names that don't match the selector\n\n## Recommended Possible Defect in Production Code\n\nBased on the analysis, I recommend investigating the **HTML tokenization and tag name processing logic** in the production code. The likely defect is:\n\n**The HTML parser's tag name validation or normalization logic is incorrectly rejecting or modifying non-ASCII characters in tag names.**\n\nSpecifically, look for:\n- Character encoding validation that only accepts ASCII characters for tag names\n- Tag name normalization functions that strip or replace non-ASCII characters\n- CSS selector matching logic that doesn't handle non-ASCII tag names correctly\n- HTML specification compliance issues regarding Unicode characters in tag names\n\nThe defect likely resides in the core parsing components that handle tag recognition and element creation, rather than in the CSS selector engine itself, since the element doesn't appear to be created properly in the first place.",
+            "test_suite": "org.jsoup.parser.HtmlParserTest",
+            "score": 3,
+            "reason": "#3# While the register method stores tags in the registry, the core issue appears to be in tag name validation or parsing logic before registration. The register method simply stores whatever tag name it receives, so if non-ASCII tag names are being rejected or normalized earlier in the parsing process, this method wouldn't be the root cause. The problem likely occurs during HTML tokenization or tag creation where non-ASCII characters are being filtered out before reaching the registration step."
+        }
+    ],
+    "buggy_codes": {
+        "org.jsoup.parser.Tag::register(Tag)": {
+            "method_name": "org.jsoup.parser.Tag::register(Tag)",
+            "method_code": "```java\n    private static void register(Tag tag) {\n        tags.put(tag.tagName, tag);\n    }\n\n```",
+            "method_doc": "Registers a Tag instance in the tags registry by mapping its tagName to the tag object."
+        },
+        "org.jsoup.parser.Tag::valueOf(String)": {
+            "method_name": "org.jsoup.parser.Tag::valueOf(String)",
+            "method_code": "```java\n    public static Tag valueOf(String tagName) {\n        Validate.notNull(tagName);\n        Tag tag = tags.get(tagName);\n\n        if (tag == null) {\n            tagName = tagName.trim().toLowerCase();\n            Validate.notEmpty(tagName);\n            tag = tags.get(tagName);\n\n            if (tag == null) {\n                // not defined: create default; go anywhere, do anything! (incl be inside a <p>)\n                tag = new Tag(tagName);\n                tag.isBlock = false;\n                tag.canContainBlock = true;\n            }\n        }\n        return tag;\n    }\n\n```",
+            "method_doc": " Get a Tag by name. If not previously defined (unknown), returns a new generic tag, that can do anything. <p> Pre-defined tags (P, DIV etc) will be ==, but unknown tags are not registered and will only .equals(). </p>  @param tagName Name of tag, e.g. \"p\". Case insensitive. @return The tag, either defined or new generic. "
+        }
+    }
+}
