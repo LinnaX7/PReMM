@@ -15,6 +15,7 @@ def preprocessor(m_state: MAgentState):
                                        m_state.get('database_name'),
                                        m_state.get('bug_id'), f"Top-{utils.CUR_FAULT_METHOD}")
     if not os.path.exists(analysis_output):
+        print(f"Begin Program Analyzing {m_state.get('bug_id')}")
         utils.Repair_Process_Logger.log(f"Begin Program Analyzing {m_state.get('bug_id')}")
         start_time = utils.get_time()
         if utils.IS_PERFECT_FAULT_LOCALIZATION:
@@ -34,6 +35,7 @@ def preprocessor(m_state: MAgentState):
                 list(m_state.get('failed_test_cases').keys()),
                 m_state.get('bug_benchmark').get_suspicious_method(utils.CUR_FAULT_METHOD - 1)
             )
+        print(f"End Analyze {m_state.get('bug_id')}")
         utils.output_prepare_info(signature_method_map, methods_tests_map, method_test_path_map, analysis_output)
         utils.Repair_Process_Logger.log(f"End Analyze {m_state.get('bug_id')}")
         end_time = utils.get_time()

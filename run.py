@@ -91,12 +91,12 @@ if __name__ == '__main__':
     parser.add_argument("--total_tries", type=int, default=3)
     parser.add_argument("--max_token", type=int, default=8192)
     parser.add_argument("-f", "--faulty_methods_clustering", help="flag that enable faulty methods clustering.",
-                        action="store_true", default=False)
+                        action="store_true", default=True)
     parser.add_argument("-c", "--context_extraction", help="flag that enable context extraction.",
-                        action="store_true", default=False)
+                        action="store_true", default=True)
     parser.add_argument("-d", "--dual_agent_based_patch_generation",
                         help="flag that dual-agent-based patch generation.",
-                        action="store_true", default=False)
+                        action="store_true", default=True)
     parser.add_argument("-wopfl", "--without_perfect_fault_localization",
                         help="flag that enable perfect fault localization.",
                         action="store_true", default=False)
@@ -130,7 +130,7 @@ if __name__ == '__main__':
     utils.IS_PERFECT_FAULT_LOCALIZATION = not args.without_perfect_fault_localization
     version_name = utils.get_version_name()
 
-    cur_benchmark = BenchmarkRegistry.create_benchmark(args.dataset)
+    cur_benchmark = BenchmarkRegistry.create_benchmark(args.dataset.lower())
 
     if args.bug_id == "all":
         bug_to_be_repaired = cur_benchmark.get_all_bugs()
