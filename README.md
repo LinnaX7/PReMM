@@ -1,8 +1,14 @@
 # PReMM: LLM-Based Program Repair for Multi-Method Bugs via Divide and Conquer
 [![DOI](https://zenodo.org/badge/1006978798.svg)](https://doi.org/10.5281/zenodo.16927560)
 ---
-## Video
-<video src="演示视频.mov" width="600" controls>
+<video width="600" controls preload="metadata">
+
+  <source src="演示视频.mov" type="video/quicktime">
+  <!-- 备用内容 -->
+  <p>
+    您的浏览器不支持 HTML5 视频。
+    <a href="演示视频.mov">下载视频</a>
+  </p>
 </video>
 
 ## 1. Introduction
