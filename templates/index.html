@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PReMM:基于大语言模型的跨方法程序缺陷修复平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .input-section {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #5a6fd8;
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .status-section {
+            padding: 30px;
+            text-align: center;
+            background: #e3f2fd;
+        }
+
+        .status-message {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .dialogue-section {
+            padding: 30px;
+            min-height: 400px;
+        }
+
+        .message {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .user-message {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+        }
+
+        .analysis-message {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+        }
+
+        .repair-message {
+            background: #e8f5e8;
+            border-left: 4px solid #388e3c;
+        }
+
+        .validation-message {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+
+        .system-message {
+            background: #eceff1;
+            border-left: 4px solid #90a4ae;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .analysis-stage {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .analysis-step {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .analysis-step.completed .step-icon {
+            color: #4caf50;
+        }
+        
+        .analysis-step.processing .step-icon {
+            color: #2196f3;
+        }
+        
+        .step-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .message-role {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .message-content {
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 PReMM:基于大语言模型的跨方法程序缺陷修复平台</h1>
+            <p>智能错误定位与修复建议</p>
+        </div>
+
+        <div class="input-section">
+            <form id="bugForm">
+                <div class="form-group">
+                    <label for="dataset">数据集名称:</label>
+                    <input type="text" id="dataset" name="dataset" placeholder="e.g., Defects4jV1.2, Defects4jV2, Defects4J-Trans, Gitbug-Java" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bug_id">Bug ID:</label>
+                    <input type="text" id="bug_id" name="bug_id" placeholder="e.g., Chart-1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="is_perfect_location">是否为完美错误定位:</label>
+                    <select id="is_perfect_location" name="is_perfect_location" required>
+                        <option value="">请选择</option>
+                        <option value="true">是</option>
+                        <option value="false">否</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn">开始修复</button>
+            </form>
+        </div>
+        
+        <div id="statusSection" class="status-section hidden">
+            <div class="status-message" id="statusMessage"></div>
+        </div>
+        
+        <div class="dialogue-section" id="dialogueSection">
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('bugForm');
+        const statusSection = document.getElementById('statusSection');
+        const statusMessage = document.getElementById('statusMessage');
+        const resultDiv = document.getElementById('result');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const dataset = document.getElementById('dataset').value;
+            const bugId = document.getElementById('bug_id').value;
+            const isPerfectLocation = document.getElementById('is_perfect_location').value === 'true';
+            
+            // 显示处理状态
+            statusSection.classList.remove('hidden');
+            statusMessage.innerHTML = '<span class="loading"></span>正在连接到服务器...';
+            resultDiv.innerHTML = '';
+            
+            try {
+                // 禁用提交按钮
+                const submitBtn = form.querySelector('.btn');
+                submitBtn.disabled = true;
+                
+                // 连接到WebSocket
+                const ws = new WebSocket(`ws://localhost:8000/ws`);
+                
+                ws.onopen = function(event) {
+                    console.log('WebSocket连接已建立');
+                    
+                    // 显示分析阶段
+                    statusMessage.innerHTML = `
+                        <div><span class="loading"></span>正在分析中，请稍候...</div>
+                        <div class="analysis-stage">
+                            <div class="analysis-step processing">
+                                <span class="step-icon">🔄</span>
+                                <span>程序依赖分析</span>
+                            </div>
+                            <div class="analysis-step">
+                                <span class="step-icon">⏳</span>
+                                <span>代码相似度检索</span>
+                            </div>
+                            <div class="analysis-step">
+                                <span class="step-icon">⏳</span>
+                                <span>上下文提取</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // 发送数据到后端
+                    ws.send(JSON.stringify({
+                        dataset_name: dataset,
+                        bug_id: bugId,
+                        is_perfect_location: isPerfectLocation
+                    }));
+                };
+                
+                ws.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    
+                    if (data.type === 'analysis_complete') {
+                        // 更新分析阶段显示
+                        statusMessage.innerHTML = `
+                            <div>✅ 分析成功</div>
+                            <div class="analysis-stage">
+                                <div class="analysis-step completed">
+                                    <span class="step-icon">✅</span>
+                                    <span>程序依赖分析</span>
+                                </div>
+                                <div class="analysis-step completed">
+                                    <span class="step-icon">✅</span>
+                                    <span>代码相似度检索</span>
+                                </div>
+                                <div class="analysis-step completed">
+                                    <span class="step-icon">✅</span>
+                                    <span>上下文提取</span>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // 不再自动隐藏，保持状态可见
+                    } else if (data.type === 'stream_start') {
+                        // 隐藏状态区域
+                        statusSection.classList.add('hidden');
+
+                        // 创建新的消息容器
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'message';
+
+                        // 根据代理类型设置样式
+                        if (data.agent === 'fault_analysis') {
+                            messageDiv.classList.add('analysis-message');
+                            messageDiv.innerHTML = `
+                                <div class="message-header">
+                                    <span class="message-role">🔍 Fault Analysis Agent</span>
+                                </div>
+                                <div class="message-content"></div>
+                            `;
+                        } else if (data.agent === 'repair') {
+                            messageDiv.classList.add('repair-message');
+                            messageDiv.innerHTML = `
+                                <div class="message-header">
+                                    <span class="message-role">🔧 Repair Agent</span>
+                                </div>
+                                <div class="message-content"></div>
+                            `;
+                        } else if (data.agent === 'validation') {
+                            messageDiv.classList.add('validation-message');
+                            messageDiv.innerHTML = `
+                                <div class="message-header">
+                                    <span class="message-role">✅ Validation Agent</span>
+                                </div>
+                                <div class="message-content"></div>
+                            `;
+                        } else if (data.agent === 'user') {
+                            messageDiv.classList.add('user-message');
+                            messageDiv.innerHTML = `
+                                <div class="message-header">
+                                    <span class="message-role">👤 用户</span>
+                                </div>
+                                <div class="message-content"></div>
+                            `;
+                        }
+
+                        resultDiv.appendChild(messageDiv);
+                        // 滚动到页面底部
+                        window.scrollTo(0, document.body.scrollHeight);
+                    } else if (data.type === 'stream_content') {
+                        // 获取最后一个消息容器并添加内容
+                        const lastMessage = resultDiv.lastElementChild;
+                        if (lastMessage) {
+                            const contentDiv = lastMessage.querySelector('.message-content');
+                            if (contentDiv) {
+                                contentDiv.textContent += data.content;
+                                // 滚动到页面底部以确保最新内容可见
+                                window.scrollTo(0, document.body.scrollHeight);
+                            }
+                        }
+                    } else if (data.type === 'stream_end') {
+                        // 流式传输结束，不需要特殊处理
+                    } else if (data.type === 'process') {
+                        // 处理非流式消息
+                        if (data.agent === 'user') {
+                            const messageDiv = document.createElement('div');
+                            messageDiv.className = 'message user-message';
+                            messageDiv.innerHTML = `
+                                <div class="message-header">
+                                    <span class="message-role">👤 用户</span>
+                                </div>
+                                <div class="message-content">${data.content}</div>
+                            `;
+                            resultDiv.appendChild(messageDiv);
+                            // 滚动到页面底部
+                            window.scrollTo(0, document.body.scrollHeight);
+                        } else if (data.agent === 'system') {
+                            const messageDiv = document.createElement('div');
+                            messageDiv.className = 'message system-message';
+                            messageDiv.innerHTML = `
+                                <div class="message-content">${data.content}</div>
+                            `;
+                            resultDiv.appendChild(messageDiv);
+                            // 滚动到页面底部
+                            window.scrollTo(0, document.body.scrollHeight);
+                        }
+                    }
+                };
+                
+                ws.onerror = function(error) {
+                    console.error('WebSocket错误:', error);
+                    statusMessage.innerHTML = '❌ 连接出错，请重试';
+                    submitBtn.disabled = false;
+                };
+                
+                ws.onclose = function(event) {
+                    console.log('WebSocket连接已关闭');
+                    submitBtn.disabled = false;
+                };
+                
+            } catch (error) {
+                console.error('Error:', error);
+                statusMessage.innerHTML = '❌ 发生错误，请重试';
+                const submitBtn = form.querySelector('.btn');
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

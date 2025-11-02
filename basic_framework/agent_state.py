@@ -1,6 +1,8 @@
 from typing import TypedDict
 from enum import Enum
 
+from fastapi import WebSocket
+
 from benchmark.benchmark import Benchmark
 
 
@@ -107,6 +109,7 @@ class AgentState(TypedDict):
     key_token_mining_prompt: bool
     fault_analysis_success: bool
     bug_benchmark: Benchmark
+    websocket_id: str
 
 
 class MAgentState(TypedDict):
@@ -119,3 +122,4 @@ class MAgentState(TypedDict):
     repair_result: RepairStateEnum
     merged_agents: dict
     bug_benchmark: Benchmark
+    websocket_id: str

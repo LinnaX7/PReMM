@@ -1,11 +1,16 @@
+import asyncio
+import json
 import os.path
+import threading
+
 from basic_framework.agent_state import MAgentState, RepairStateEnum, AgentState, RepairState
 from basic_framework.program_analysis import program_analysis_repository_with_pfl, key_token_mining, related_analysis, \
     program_analysis_repository_without_pfl
 import utils
 
 
-def preprocessor(m_state: MAgentState):
+async def preprocessor(m_state: MAgentState):
+    # print("m_state: ",m_state)
     m_state['failed_test_cases'] = m_state.get('bug_benchmark').get_init_failing_tests()
     if utils.IS_PERFECT_FAULT_LOCALIZATION:
         analysis_output = os.path.join(utils.ANALYSIS_DIR, m_state.get('database_name'), m_state.get('bug_id'),
@@ -42,6 +47,17 @@ def preprocessor(m_state: MAgentState):
         utils.Repair_Process_Logger.log(f"Program Analysis Time: {end_time - start_time} s.")
     else:
         signature_method_map, methods_tests_map, method_test_path_map = utils.load_prepare_info(analysis_output)
+    # print(m_state.get('websocket_id'))
+    
+    # 检查 websocket_id 是否存在并有效
+    websocket = utils.websocket_maps.get(m_state.get('websocket_id'))
+    if websocket is not None:
+        await websocket.send_text(json.dumps({
+                        "type": "analysis_complete"
+                    }))
+    else:
+        print("WebSocket connection not found or invalid")
+
     m_state['fault_codes_list'], m_state['fault_files'] = utils.codes_format_transform(
         list(signature_method_map.values()))
     if utils.Enable_FMC:
@@ -190,17 +206,18 @@ def group_agents(m_state: MAgentState):
         m_state['merged_agents'][test_tuple].extend(agent_group)
 
 
-def repairing(a_state: AgentState):
-    utils.repair_agent.invoke(a_state, {"recursion_limit": 100})
+async def repairing(a_state: AgentState):
+    await utils.repair_agent.ainvoke(a_state, {"recursion_limit": 100})
 
 
-def multi_repairer(m_state: MAgentState):
+async def multi_repairer(m_state: MAgentState):
     for agent_state in m_state['agent_states']:
-        repairing(agent_state)
+        agent_state['websocket_id'] = m_state.get('websocket_id')
+        await repairing(agent_state)
     return m_state
 
 
-def combine_and_test(m_state: MAgentState):
+async def combine_and_test(m_state: MAgentState):
     m_state['repair_result'] = RepairStateEnum.REPAIR_TEST_SUCCESS
     for tests, agent_group in m_state['merged_agents'].items():
         file_list = compile_agent_group(m_state, agent_group)
@@ -208,6 +225,8 @@ def combine_and_test(m_state: MAgentState):
         if len(test_result) == 0:
             print("The merged agent group passed all the failed test cases!")
             utils.Repair_Process_Logger.log("The merged agent group passed all the failed test cases!")
+            await utils.stream_message(utils.websocket_maps.get(m_state.get('websocket_id')),
+                                       "validation", "The combined test-related patch passed all the related failed test cases!")
             for agent_state in agent_group:
                 agent_state['repair_state']['repair_result'] = RepairStateEnum.REPAIR_TEST_SUCCESS
             if len(m_state['merged_agents']) > 1:
@@ -220,6 +239,8 @@ def combine_and_test(m_state: MAgentState):
             utils.Repair_Process_Logger.log(
                 f"The merged agent group did not pass the failed test cases with the following info {str(test_result)}."
                 f"Please regenerate the repaired code.")
+            await utils.stream_message(utils.websocket_maps.get(m_state.get('websocket_id')),
+                                       "validation", f"The combined test-related patch did not pass the related failed test cases with the following info {str(test_result)}.")
             for agent_state in agent_group:
                 agent_state['repair_state']['repair_result'] = RepairStateEnum.REPAIR_TEST_FAILED
                 m_state['repair_result'] = RepairStateEnum.REPAIR_TEST_FAILED
@@ -245,10 +266,13 @@ def compile_agent_group(m_state: MAgentState, agent_group):
     return fault_files
 
 
-def continue_to_overall_compile(m_state: MAgentState):
+async def continue_to_overall_compile(m_state: MAgentState):
     # repair_success = True
     utils.modify_files(m_state.get('bug_benchmark').get_work_dir(), m_state.get('fault_codes_list'))
     m_state.get('bug_benchmark').compile_project()
+    if m_state.get('repair_result') == RepairStateEnum.COMPILE_SUCCESS:
+        await utils.stream_message(utils.websocket_maps.get(m_state.get('websocket_id')),
+                                   "validation", "The final patch is compiled successfully!")
     return m_state
 
 
@@ -270,7 +294,7 @@ def test_analysis(test_result, a_state: AgentState, repair_success):
         return False
 
 
-def test_all_cases(m_state: MAgentState):
+async def test_all_cases(m_state: MAgentState):
     # Test All
     try:
         failing_test_num, test_result = m_state.get('bug_benchmark').test_project()
@@ -281,6 +305,8 @@ def test_all_cases(m_state: MAgentState):
                 a_state['failed_test_cases'] = []
             print("The repaired codes passed all the test cases!")
             utils.Repair_Process_Logger.log("The repaired codes passed all the test cases!")
+            await utils.stream_message(utils.websocket_maps.get(m_state.get('websocket_id')),
+                                       "validation", "The final patch passed all the test cases!")
         else:
             if failing_test_num < 30:
                 m_state['repair_result'] = RepairStateEnum.REPAIR_SUCCESS
@@ -313,6 +339,9 @@ def test_all_cases(m_state: MAgentState):
                 utils.Repair_Process_Logger.log(
                     f"The repaired codes did not pass the test cases with the following info {str(test_result)}. "
                     f"Please regenerate the repaired code.")
+                await utils.stream_message(utils.websocket_maps.get(m_state.get('websocket_id')),
+                                           "validation",
+                                           f"The final patch did not pass the failed test cases with the following info {str(test_result)}.")
             else:
                 raise Exception(
                     "The repaired codes passed the failed test cases, but when testing the all project, it failed more than 30 test cases.")
@@ -326,14 +355,14 @@ def test_all_cases(m_state: MAgentState):
     return m_state
 
 
-def recover_codes(m_state: MAgentState):
+async def recover_codes(m_state: MAgentState):
     # recover code
     utils.recover_files(m_state.get('bug_benchmark').get_work_dir(), m_state.get('fault_files'))
     m_state.get('bug_benchmark').recover_files(m_state.get('fault_files'))
     return m_state
 
 
-def postprocessor(m_state: MAgentState):
+async def postprocessor(m_state: MAgentState):
     if m_state.get('repair_result') == RepairStateEnum.REPAIR_SUCCESS:
         utils.generate_patch_diff(m_state.get('bug_id'), m_state.get('bug_benchmark').get_work_dir(),
                                   m_state.get('fault_files'))

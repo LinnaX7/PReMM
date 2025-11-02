@@ -1,5 +1,6 @@
 import argparse
 import csv
+import json
 import os
 import time
 
@@ -10,7 +11,7 @@ from benchmark.benchmark import BenchmarkRegistry
 from logger import Logger
 
 
-def run_repair_single_bug(max_tries, version_name, dataset, bug_id, benchmark):
+async def run_repair_single_bug(max_tries, version_name, dataset, bug_id, benchmark, websocket_id=None):
     utils.OUTPUT_DIR = "output" + os.sep + utils.MODEL_NAME + os.sep + version_name + os.sep + dataset
     start_time = time.time()
     if not os.path.exists(utils.OUTPUT_DIR):
@@ -44,9 +45,10 @@ def run_repair_single_bug(max_tries, version_name, dataset, bug_id, benchmark):
             utils.Repair_Process_Logger.log(
                 f"Trying to use the the perfect fault localization to repair the program....")
         while (not utils.Repair_Result) and repair_count < max_tries:
-            main_agent.invoke({'bug_id': bug_id, "database_name": dataset,
+            # print(websocket_id)
+            await main_agent.ainvoke({'bug_id': bug_id, "database_name": dataset,
                                'failed_test_cases': benchmark.get_init_failing_tests(),
-                               'bug_benchmark': benchmark}, {"recursion_limit": 100})
+                               'bug_benchmark': benchmark, 'websocket_id': websocket_id}, {"recursion_limit": 100}, stream_mode="custom")
             repair_count += 1
 
         rows = ["Bug_id", "Repair_Result", "Repair_Attempt_Count", "Repair_Iterative_Count",
@@ -55,6 +57,18 @@ def run_repair_single_bug(max_tries, version_name, dataset, bug_id, benchmark):
         row = [f"{bug_id}", utils.Repair_Result, repair_count, utils.Repair_Iterative_Count, utils.Prompt_Tokens,
                utils.Completion_Tokens, utils.Total_Prompt_Token, utils.Total_Completion_Token]
 
+        if utils.Repair_Result:
+            await utils.websocket_maps.get(websocket_id).send_text(json.dumps({
+                "type": "process",
+                "agent": "system",
+                "content": "✅ 修复成功！"
+            }))
+        else:
+            await utils.websocket_maps.get(websocket_id).send_text(json.dumps({
+                "type": "process",
+                "agent": "system",
+                "content": "❌ 修复失败，已达到最大尝试次数"
+            }))
         with open(repair_result_file, mode='a+', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             if utils.CUR_FAULT_METHOD == 1:

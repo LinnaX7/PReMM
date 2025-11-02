@@ -1,3 +1,4 @@
+import asyncio
 import os
 import json
 import shutil
@@ -7,6 +8,7 @@ import time
 
 from langchain_openai import ChatOpenAI
 import tiktoken
+from fastapi import WebSocket
 import jpype
 import multiprocessing
 
@@ -19,6 +21,11 @@ def read_json(filepath):
     else:
         print("File path " + filepath + " not exists!")
         return
+
+
+websocket_maps = {
+
+}
 
 
 def get_custom_llm():
@@ -429,3 +436,63 @@ def get_method_position(java_code, method_name, in_line=-1):
     process.join()
     position = queue.get()
     return int(position.split(",")[0]), int(position.split(",")[1])
+
+
+# 新增流式消息发送函数
+async def stream_message(websocket: WebSocket, agent: str, content: str):
+    """
+    流式发送消息，逐字符发送以创建打字机效果
+    """
+    # 先发送开始标记
+    await websocket.send_text(json.dumps({
+        "type": "stream_start",
+        "agent": agent
+    }))
+
+    # 逐字符发送内容
+    chunk_size = 100  # 每次发送100个字符
+    for i in range(0, len(content), chunk_size):
+        chunk = content[i:i + chunk_size]
+        await websocket.send_text(json.dumps({
+            "type": "stream_content",
+            "agent": agent,
+            "content": chunk
+        }))
+        await asyncio.sleep(0.05)  # 控制打字速度
+
+    # 发送结束标记
+    await websocket.send_text(json.dumps({
+        "type": "stream_end",
+        "agent": agent
+    }))
+
+
+async def agent_stream_message(websocket: WebSocket, agent: str, prompt_input):
+    full_response = ""
+    if websocket is not None:
+        await websocket.send_text(json.dumps({
+            "type": "stream_start",
+            "agent": agent
+        }))
+    for chunk in CUSTOM_MODEL.stream(prompt_input):  # 使用流式方法
+        if chunk is not None:
+            content = chunk.content if hasattr(chunk, 'content') else str(chunk)
+            full_response += content
+            # 实时输出每个chunk到控制台和日志
+            print(content, end='', flush=True)
+
+            # 如果有websocket连接，也可以实时发送
+
+            await websocket.send_text(json.dumps({
+                "type": "stream_content",
+                "agent": agent,
+                "content": content
+            }))
+            await asyncio.sleep(0.01)  # 控制打字速度
+    # 发送结束标记
+    await websocket.send_text(json.dumps({
+        "type": "stream_end",
+        "agent": agent
+    }))
+    return full_response
+

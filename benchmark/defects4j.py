@@ -10,6 +10,19 @@ from benchmark.benchmark import Benchmark, BenchmarkRegistry
 from logger import Logger
 
 environment_config = utils.read_json("Config/defects4j_environment.json")
+JAVA_7_HOME = environment_config["JAVA_7_HOME"]
+JAVA_8_HOME = environment_config["JAVA_8_HOME"]
+Defects4J_DIR = environment_config["Defects4J_DIR"]
+Defects4J_V2_DIR = environment_config["Defects4J_V2_DIR"]
+Defects4J_Trans_DIR = environment_config["Defects4J_Trans_DIR"]
+
+JAVA7_CMD = (" && ".join([f"export JAVA_HOME=\"{JAVA_7_HOME}\"", "export CLASS_PATH=\"$JAVA_HOME/lib\"",
+                          "export PATH=.$PATH:\"$JAVA_HOME/bin\""]))
+JAVA8_CMD = (" && ".join([f"export JAVA_HOME=\"{JAVA_8_HOME}\"", "export CLASS_PATH=\"$JAVA_HOME/lib\"",
+                          "export PATH=.:\"$JAVA_HOME/bin\":$PATH"]))
+Defects4J_CMD = (" && ".join([JAVA7_CMD, f"export PATH=.:\"{Defects4J_DIR}/framework/bin\":$PATH"]))
+Defects4J_V2_CMD = (" && ".join([JAVA8_CMD, f"export PATH=.:\"{Defects4J_V2_DIR}/framework/bin\":$PATH"]))
+Defects4J_Trans_CMD = (" && ".join([JAVA8_CMD, f"export PATH=.:\"{Defects4J_Trans_DIR}/framework/bin\":$PATH"]))
 TEMP_DIR = environment_config["TEMP_DIR"]
 
 
@@ -222,6 +235,13 @@ def run_command(command, logger, cwd=None):
 
 
 def prepare_project(database_name, bug_id, working_dir):
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     project_name = bug_id.split("-")[0]
     idd = int(bug_id.split("-")[1])
     checkout_cmd = f"defects4j checkout -p {project_name} -v {idd}b -w {working_dir}"
@@ -229,11 +249,12 @@ def prepare_project(database_name, bug_id, working_dir):
     compile_cmd = "defects4j compile"
     # test_cmd = "defects4j test"
     # test_methods = f"defects4j export -w {working_dir} -p tests.trigger"
-    execute_cmd = " && ".join([checkout_cmd, cd_working_dir_cmd, compile_cmd])
+    execute_cmd = " && ".join([prepare_dataset_env_cmd, checkout_cmd, cd_working_dir_cmd, compile_cmd])
     # execute_cmd = " && ".join([prepare_dataset_env_cmd, test_methods])
     if not os.path.exists("output"):
         os.makedirs("output")
     logger = Logger(os.path.join("output", bug_id + "_result.txt"))
+
     run_command(execute_cmd, logger)
     # if database_name == "defects4j-trans":
     #     init_defects4j_trans_env(bug_id, working_dir)
@@ -256,8 +277,15 @@ def get_test_code(working_dir, test_source_dir, test_name):
 
 
 def run_single_test(database_name, working_dir, test_source_dir, test_case):
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     test_cmd = f"defects4j test -w {working_dir} -t {test_case}"
-    execute_cmd = " && ".join([test_cmd])
+    execute_cmd = " && ".join([prepare_dataset_env_cmd, test_cmd])
     error_file = open("stderr.txt", "wb")
     test_result = subprocess.Popen(execute_cmd, shell=True, stdout=subprocess.PIPE, stderr=error_file, bufsize=-1,
                                    start_new_session=True)
@@ -325,9 +353,16 @@ def run_test_cases(database_name, working_dir, test_source_dir, test_cases):
 
 
 def test_project(database_name, bug_id, working_dir, test_source_dir):
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     cd_working_dir_cmd = f"cd {working_dir}"
     test_cmd = f"defects4j test"
-    execute_cmd = " && ".join([cd_working_dir_cmd, test_cmd])
+    execute_cmd = " && ".join([prepare_dataset_env_cmd, cd_working_dir_cmd, test_cmd])
     if not os.path.exists("output"):
         os.makedirs("output")
     logger = Logger(os.path.join("output", bug_id + "_result.txt"))
@@ -347,9 +382,16 @@ def test_project(database_name, bug_id, working_dir, test_source_dir):
 
 
 def compile_project(database_name, bug_id, working_dir):
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     cd_working_dir_cmd = f"cd {working_dir}"
     test_cmd = f"defects4j compile"
-    execute_cmd = " && ".join([cd_working_dir_cmd, test_cmd])
+    execute_cmd = " && ".join([prepare_dataset_env_cmd, cd_working_dir_cmd, test_cmd])
     if not os.path.exists("output"):
         os.makedirs("output")
     logger = Logger(os.path.join("output", bug_id + "_result.txt"))
@@ -357,9 +399,16 @@ def compile_project(database_name, bug_id, working_dir):
 
 
 def get_test_info(database_name, working_dir, test_source_dir, num_tests=1):
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     cd_working_dir_cmd = f"cd {working_dir}"
     cat_test_info = "cat failing_tests"
-    execute_cmd = " && ".join([cd_working_dir_cmd, cat_test_info])
+    execute_cmd = " && ".join([prepare_dataset_env_cmd, cd_working_dir_cmd, cat_test_info])
     test_result = subprocess.Popen(execute_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=-1,
                                    start_new_session=True)
     failing_tests = {}
@@ -385,16 +434,25 @@ def get_test_info(database_name, working_dir, test_source_dir, num_tests=1):
 
 
 def get_necessary_path(database_name, working_dir):
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     source_dir = os.popen(
-        " && ".join(["defects4j export -p dir.src.classes -w " + working_dir])).readlines()[
+        " && ".join([prepare_dataset_env_cmd, "defects4j export -p dir.src.classes -w " + working_dir])).readlines()[
         -1].strip()
-    class_path_cmd = " && ".join(["defects4j export -p cp.compile -w " +
+    class_path_cmd = " && ".join([prepare_dataset_env_cmd, "defects4j export -p cp.compile -w " +
                                   working_dir])
     compile_jar_path = os.popen(class_path_cmd).readlines()[-1].strip()
     classes_build_dir = \
-        os.popen("defects4j export -p dir.bin.classes -w " + working_dir).readlines()[
+        os.popen(
+            prepare_dataset_env_cmd + " && " + "defects4j export -p dir.bin.classes -w " + working_dir).readlines()[
             -1].strip()
-    test_build_dir = os.popen("defects4j export -p cp.test -w " + working_dir).readlines()[
+    test_build_dir = os.popen(
+        prepare_dataset_env_cmd + " && " + "defects4j export -p cp.test -w " + working_dir).readlines()[
         -1].strip()
     for path in test_build_dir.split(os.pathsep):
         if path.endswith("test") or path.endswith("tests") or path.endswith("test-classes"):
@@ -405,17 +463,23 @@ def get_necessary_path(database_name, working_dir):
             else:
                 test_build_dir = path
             break
-    test_source_dir = os.popen(" && ".join(["defects4j export -p dir.src.tests -w " +
+    test_source_dir = os.popen(" && ".join([prepare_dataset_env_cmd, "defects4j export -p dir.src.tests -w " +
                                             working_dir])).readlines()[-1].strip()
     return compile_jar_path, source_dir, classes_build_dir, test_source_dir, test_build_dir
 
 
 def javac_compile(database_name, working_dir, classes_path, target_file_path):
     compiled_result = {}
-
+    prepare_dataset_env_cmd = ""
+    if database_name == "defects4jv1.2":
+        prepare_dataset_env_cmd = Defects4J_CMD
+    elif database_name == "defects4jv2":
+        prepare_dataset_env_cmd = Defects4J_V2_CMD
+    elif database_name == "defects4j-trans":
+        prepare_dataset_env_cmd = Defects4J_Trans_CMD
     cd_working_dir_cmd = f"cd {working_dir}"
     javac_compile_cmd = f"javac -cp {classes_path} {os.path.join(working_dir, target_file_path)}"
-    exec_cmd = " && ".join([cd_working_dir_cmd, javac_compile_cmd])
+    exec_cmd = " && ".join([prepare_dataset_env_cmd, cd_working_dir_cmd, javac_compile_cmd])
     result = subprocess.run(exec_cmd, shell=True, capture_output=True, text=True)
     compiled_info = result.stdout
     if result.returncode != 0:
